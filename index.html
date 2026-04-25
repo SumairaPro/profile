@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sumaira Nazir — FinOps Consultant</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&amp;family=Manrope:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root {
+  --bg: #0d0d14;
+  --bg2: #13131e;
+  --bg3: #181826;
+  --indigo: #7c6ef7;
+  --indigo-glow: rgba(124,110,247,0.15);
+  --indigo-mid: rgba(124,110,247,0.25);
+  --indigo-bright: rgba(124,110,247,0.45);
+  --gold: #e8c96b;
+  --gold-dim: rgba(232,201,107,0.12);
+  --text: #f0effe;
+  --muted: rgba(240,239,254,0.45);
+  --border: rgba(124,110,247,0.14);
+  --border-bright: rgba(124,110,247,0.35);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border-bright);border-radius:4px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3.5rem;background:rgba(13,13,20,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-wordmark{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--text);}
+.nav-wordmark span{color:var(--indigo);}
+.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center;}
+.nav-links a{font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--text);}
+.nav-pill{background:var(--indigo)!important;color:#0d0d14!important;padding:0.45rem 1.2rem;border-radius:2rem;font-weight:700!important;transition:opacity 0.2s!important;}
+.nav-pill:hover{opacity:0.85;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:10rem 3.5rem 5rem;position:relative;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(124,110,247,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(124,110,247,0.05) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 80%);}
+.hero-glow{position:absolute;top:-300px;left:-200px;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(124,110,247,0.09) 0%,transparent 70%);pointer-events:none;}
+.hero-glow2{position:absolute;bottom:-400px;right:-300px;width:1000px;height:1000px;border-radius:50%;background:radial-gradient(circle,rgba(232,201,107,0.05) 0%,transparent 70%);pointer-events:none;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:0.72rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--indigo);margin-bottom:2rem;animation:fadeUp 0.6s ease both;}
+.hero-dot{width:7px;height:7px;border-radius:50%;background:var(--indigo);box-shadow:0 0 12px var(--indigo);animation:pulse 2s ease infinite;}
+.hero-headline{font-family:'Playfair Display',serif;font-size:clamp(3.2rem,6.5vw,6rem);line-height:1.0;letter-spacing:-0.02em;color:var(--text);max-width:860px;margin-bottom:2rem;animation:fadeUp 0.7s 0.1s ease both;}
+.hero-headline .hl{color:var(--indigo);font-style:italic;}
+.hero-headline .gold{color:var(--gold);}
+.hero-sub{font-size:1.05rem;font-weight:300;color:var(--muted);max-width:540px;line-height:1.8;margin-bottom:3rem;animation:fadeUp 0.7s 0.2s ease both;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp 0.7s 0.3s ease both;margin-bottom:5rem;}
+.btn-indigo{background:var(--indigo);color:#0d0d14;padding:0.85rem 2rem;border-radius:2rem;font-size:0.9rem;font-weight:700;text-decoration:none;transition:all 0.2s;letter-spacing:0.02em;display:inline-flex;align-items:center;gap:8px;}
+.btn-indigo:hover{box-shadow:0 0 35px rgba(124,110,247,0.45);transform:translateY(-2px);}
+.btn-outline{color:var(--text);border:1px solid var(--border-bright);padding:0.85rem 2rem;border-radius:2rem;font-size:0.9rem;font-weight:500;text-decoration:none;transition:all 0.2s;display:inline-block;}
+.btn-outline:hover{background:var(--indigo-glow);border-color:var(--indigo);}
+.hero-stats{display:flex;gap:0;border:1px solid var(--border);border-radius:18px;overflow:hidden;animation:fadeUp 0.7s 0.4s ease both;max-width:900px;}
+.hero-stat{flex:1;padding:1.5rem 2rem;border-right:1px solid var(--border);position:relative;}
+.hero-stat:last-child{border-right:none;}
+.hero-stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--indigo),transparent);opacity:0;transition:opacity 0.3s;}
+.hero-stat:hover::before{opacity:1;}
+.hs-num{font-family:'Playfair Display',serif;font-size:2.2rem;line-height:1;color:var(--indigo);margin-bottom:4px;}
+.hs-label{font-size:0.75rem;font-weight:400;color:var(--muted);}
+
+/* EXPERTISE STRIP */
+.expertise-strip{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.4rem 3.5rem;display:flex;align-items:center;gap:1rem;overflow-x:auto;}
+.expertise-strip::-webkit-scrollbar{display:none;}
+.strip-label{font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);white-space:nowrap;flex-shrink:0;margin-right:1rem;}
+.strip-tags{display:flex;gap:0.7rem;flex-wrap:nowrap;}
+.strip-tag{white-space:nowrap;background:var(--indigo-glow);border:1px solid var(--border-bright);color:var(--indigo);padding:5px 14px;border-radius:2rem;font-size:0.76rem;font-weight:600;}
+
+/* SECTION BASE */
+.s-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--indigo);margin-bottom:1rem;display:flex;align-items:center;gap:10px;}
+.s-eyebrow::before{content:'';width:22px;height:1px;background:var(--indigo);}
+.s-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3rem);line-height:1.1;letter-spacing:-0.02em;max-width:520px;}
+
+/* SERVICES */
+#services{padding:7rem 3.5rem;}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-top:3rem;}
+.svc{background:var(--bg);padding:2.5rem;transition:background 0.3s;position:relative;cursor:default;}
+.svc::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--indigo-glow) 0%,transparent 60%);opacity:0;transition:opacity 0.3s;}
+.svc:hover{background:var(--bg3);}
+.svc:hover::after{opacity:1;}
+.svc-num{font-family:'Playfair Display',serif;font-size:0.8rem;color:var(--indigo);opacity:0.4;margin-bottom:1.25rem;display:block;font-style:italic;}
+.svc-icon{width:44px;height:44px;border-radius:12px;background:var(--indigo-glow);border:1px solid var(--border-bright);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:1.25rem;position:relative;z-index:1;}
+.svc-name{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--text);margin-bottom:0.75rem;line-height:1.2;position:relative;z-index:1;}
+.svc-desc{font-size:0.84rem;color:var(--muted);line-height:1.65;position:relative;z-index:1;}
+
+/* CREDENTIALS / BADGES */
+#credentials{padding:7rem 3.5rem;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.cred-intro{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-bottom:4rem;}
+.cred-right-text{display:flex;flex-direction:column;justify-content:center;}
+
+/* Badge tiers */
+.badge-tier{margin-bottom:3.5rem;}
+.tier-label{font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:12px;}
+.tier-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--gold-dim),transparent);}
+.badges-row{display:flex;gap:1.5rem;flex-wrap:wrap;align-items:flex-end;}
+
+/* Individual badge */
+.badge-item{display:flex;flex-direction:column;align-items:center;gap:10px;cursor:default;transition:transform 0.25s;}
+.badge-item:hover{transform:translateY(-6px);}
+.badge-img{border-radius:12px;}
+.badge-img.lg{width:110px;height:110px;object-fit:contain;}
+.badge-img.md{width:88px;height:88px;object-fit:contain;}
+.badge-img.sm{width:72px;height:72px;object-fit:contain;}
+.badge-label{font-size:0.68rem;font-weight:600;color:var(--muted);text-align:center;max-width:90px;line-height:1.3;}
+.badge-highlight .badge-img{filter:drop-shadow(0 0 16px rgba(124,110,247,0.5));}
+
+/* cloud bars */
+.cloud-bars{display:flex;flex-direction:column;gap:1.25rem;margin-top:1.5rem;}
+.cloud-bar-header{display:flex;justify-content:space-between;margin-bottom:6px;}
+.cloud-bar-name{font-size:0.85rem;font-weight:500;}
+.cloud-bar-val{font-size:0.78rem;color:var(--indigo);font-weight:600;}
+.cloud-bar-track{height:4px;background:var(--indigo-glow);border-radius:4px;overflow:hidden;}
+.cloud-bar-fill{height:100%;background:linear-gradient(90deg,var(--indigo),rgba(124,110,247,0.4));border-radius:4px;}
+.foundation-box{margin-top:2rem;background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;}
+.foundation-box-label{font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--indigo);margin-bottom:1rem;}
+.foundation-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.foundation-tag{font-size:0.75rem;color:var(--muted);background:var(--bg2);border:1px solid var(--border);padding:4px 12px;border-radius:2rem;text-decoration:none;}.foundation-tag-link{color:var(--indigo);border-color:var(--border-bright);transition:background 0.2s,color 0.2s;}.foundation-tag-link:hover{background:var(--indigo-glow);color:var(--text);}
+
+/* RESULTS */
+#results{padding:7rem 3.5rem;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* APPROACH */
+#approach{padding:7rem 3.5rem;background:var(--bg2);border-top:1px solid var(--border);}
+.approach-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;}
+.ap-step{display:grid;grid-template-columns:48px 1fr;gap:1.5rem;align-items:start;padding:1.75rem 0;border-bottom:1px solid var(--border);transition:border-color 0.3s;}
+.ap-step:first-child{border-top:1px solid var(--border);}
+.ap-step:hover{border-bottom-color:var(--border-bright);}
+.ap-num{font-family:'Playfair Display',serif;font-size:0.9rem;color:var(--indigo);opacity:0.45;padding-top:3px;font-style:italic;}
+.ap-title{font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:4px;}
+.ap-desc{font-size:0.84rem;color:var(--muted);line-height:1.6;}
+.approach-right{display:flex;flex-direction:column;justify-content:center;}
+.approach-philosophy{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,2.8vw,2.4rem);line-height:1.25;letter-spacing:-0.01em;color:var(--text);margin-top:1.5rem;}
+.approach-philosophy .em{color:var(--indigo);font-style:italic;}
+.approach-note{margin-top:2rem;font-size:0.9rem;color:var(--muted);line-height:1.75;padding-left:1.5rem;border-left:2px solid var(--border-bright);}
+
+/* CONTACT */
+#contact{padding:7rem 3.5rem;}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;max-width:none;}
+.contact-headline{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3.2rem);line-height:1.1;letter-spacing:-0.02em;margin:1rem 0 1.5rem;}
+.contact-sub{font-size:0.95rem;color:var(--muted);line-height:1.75;margin-bottom:2.5rem;}
+.contact-links{display:flex;flex-direction:column;gap:1rem;}
+.cl-item{display:flex;align-items:center;gap:14px;padding:1rem 1.25rem;background:var(--bg2);border:1px solid var(--border);border-radius:12px;text-decoration:none;transition:border-color 0.3s,background 0.3s;}
+.cl-item:hover{border-color:var(--border-bright);background:var(--bg3);}
+.cl-icon{width:36px;height:36px;border-radius:8px;background:var(--indigo-glow);border:1px solid var(--border-bright);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.cl-label{font-size:0.72rem;color:var(--muted);}
+.cl-value{font-size:0.9rem;color:var(--text);font-weight:600;}
+
+
+
+.cf-label{font-size:0.7rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted);}
+
+
+
+
+
+
+
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2rem 3.5rem;display:flex;align-items:center;justify-content:space-between;background:var(--bg);}
+.footer-wm{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--text);}
+.footer-wm span{color:var(--indigo);}
+.footer-copy{font-size:0.76rem;color:var(--muted);}
+.footer-links{display:flex;gap:2rem;}
+.footer-links a{font-size:0.76rem;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--indigo);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{box-shadow:0 0 8px var(--indigo);}50%{box-shadow:0 0 22px var(--indigo);}}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}.nav-links{display:none;}
+  .hero{padding:8rem 1.5rem 4rem;}
+  section,#services,#credentials,#results,#approach,#contact{padding:5rem 1.5rem;}
+  .expertise-strip{padding:1.25rem 1.5rem;}
+  .services-grid{grid-template-columns:1fr;}
+  .cred-intro,.results-layout,.approach-layout,.contact-layout{grid-template-columns:1fr;gap:3rem;}
+  .cf-row{grid-template-columns:1fr;}
+  .hero-stats{flex-direction:column;border-radius:12px;}
+  .hero-stat{border-right:none;border-bottom:1px solid var(--border);}
+  .hero-stat:last-child{border-bottom:none;}
+  footer{flex-direction:column;gap:1rem;text-align:center;}
+}
+
+/* ── HERO LAYOUT WITH PANEL ── */
+.hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 3rem;
+  align-items: center;
+  width: 100%;
+}
+.hero-content { display: flex; flex-direction: column; min-width: 0; }
+
+/* Right-side panel: org bar on top, quote card with portrait inside */
+.hero-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-items: stretch;
+  min-width: 0;
+}
+
+/* Top governing-bodies bar */
+.hero-org-bar {
+  background: var(--bg2);
+  border-radius: 14px 14px 0 0;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1.25rem;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+}
+.hero-org-bar img {
+  height: 30px;
+  width: auto;
+  max-width: 32%;
+  object-fit: contain;
+  display: block;
+  /* Each logo sits on a white pill so black text & dark backgrounds read */
+  background: #fff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  box-sizing: content-box;
+  opacity: 1;
+}
+.hero-org-divider {
+  width: 1px;
+  height: 22px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+/* Quote + portrait composite */
+.hero-card-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.hero-quote-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 2rem 2.25rem 1.75rem;
+  position: relative;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+.hero-quote-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  color: var(--indigo);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.hero-quote-text {
+  font-size: 1.4rem;
+  line-height: 1.45;
+  color: var(--text);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.hero-quote-text em { font-style: italic; color: var(--indigo); }
+.hero-quote-bar {
+  margin-top: 1.5rem;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--indigo) 0%, var(--indigo) 70%, transparent 100%);
+  position: relative;
+}
+.hero-quote-bar::after {
+  content: '';
+  position: absolute;
+  right: 28%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--indigo);
+  box-shadow: 0 0 12px var(--indigo);
+}
+
+/* Portrait stack on the right of the quote */
+.hero-portrait-wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 130px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero-portrait {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  border: 2px solid var(--border-bright);
+}
+.hero-portrait-glow { display: none; }
+.hero-portrait-name {
+  margin-top: 0.85rem;
+  text-align: center;
+  /* Let the name block extend wider than the 130px portrait so the longer title fits */
+  width: max-content;
+  max-width: 240px;
+  margin-left: -55px;
+  margin-right: -55px;
+}
+.hero-portrait-name-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+  display: block;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+.hero-cert-sep {
+  color: var(--indigo);
+  font-weight: 400;
+  margin: 0 4px;
+  opacity: 0.7;
+}
+.hero-portrait-name-title {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--indigo);
+  display: block;
+  margin-top: 5px;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+/* Cloud logos under the quote+portrait card */
+.hero-cloud-row {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid var(--border);
+  width: 100%;
+}
+.hero-cloud-row img {
+  height: 44px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
+.hero-cloud-row img:hover { opacity: 1; }
+
+@media (max-width: 1100px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero-quote-text { font-size: 1.2rem; }
+}
+@media (max-width: 720px) {
+  .hero-card-row { grid-template-columns: 1fr; gap: 1.5rem; justify-items: center; }
+  .hero-quote-card { padding: 1.5rem 1.5rem 1.25rem; }
+  .hero-quote-text { font-size: 1.05rem; }
+  .hero-org-bar { padding: 0.85rem 1rem; gap: 0.75rem; }
+  .hero-org-bar img { height: 20px; }
+  .hero-portrait-wrap { width: 110px; }
+  .hero-portrait { width: 110px; height: 110px; }
+  .hero-portrait-name {
+    margin-left: 0; margin-right: 0; max-width: 280px; width: auto;
+  }
+  .hero-portrait-name-text,
+  .hero-portrait-name-title { white-space: normal; }
+  .hero-cloud-row { gap: 1.5rem; padding: 1rem 0.75rem; }
+  .hero-cloud-row img { height: 32px; max-width: 100px; }
+}
+
+
+.svc-icon-svg {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--indigo-glow); border: 1px solid var(--border-bright);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.25rem; position: relative; z-index: 1; flex-shrink: 0;
+}
+.svc-icon-svg svg { width: 22px; height: 22px; color: var(--indigo); }
+.cl-icon-svg {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--indigo-glow); border: 1px solid var(--border-bright);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.cl-icon-svg svg { width: 18px; height: 18px; color: var(--indigo); }
+.ap-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--indigo-glow); border: 1px solid var(--border-bright);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.ap-icon svg { width: 18px; height: 18px; color: var(--indigo); }
+
+
+/* ── COLLABORATION SECTION ── */
+#collaboration {
+  padding: 7rem 3.5rem;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  position: relative;
+}
+#collaboration::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(124,110,247,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.collab-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 5rem;
+  align-items: start;
+}
+.collab-intro-text {
+  font-size: 0.95rem; color: var(--muted); line-height: 1.8;
+  margin-top: 1.5rem;
+}
+.collab-intro-text strong { color: var(--text); font-weight: 600; }
+
+/* Persona cards grid */
+.personas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.persona-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.4rem 1.25rem;
+  transition: border-color 0.3s, background 0.3s, transform 0.25s;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+.persona-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--indigo), var(--gold));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.persona-card:hover {
+  border-color: var(--border-bright);
+  background: var(--bg3);
+  transform: translateY(-3px);
+}
+.persona-card:hover::before { opacity: 1; }
+
+.persona-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: var(--indigo-glow);
+  border: 1px solid var(--border-bright);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 0.9rem;
+}
+.persona-icon svg { width: 18px; height: 18px; color: var(--indigo); }
+
+.persona-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem; font-weight: 700;
+  color: var(--text); line-height: 1.2;
+  margin-bottom: 0.4rem;
+}
+.persona-dept {
+  font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--indigo); margin-bottom: 0.6rem;
+}
+.persona-collab {
+  font-size: 0.78rem; color: var(--muted); line-height: 1.5;
+}
+
+/* Results ribbon */
+.collab-results-strip {
+  margin-top: 3rem;
+  display: flex; gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.crstrip-item {
+  flex: 1; padding: 1.25rem 1.5rem;
+  background: var(--bg2);
+  text-align: center;
+  transition: background 0.2s;
+}
+.crstrip-item:hover { background: var(--bg3); }
+.crstrip-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; color: var(--indigo); line-height: 1;
+  margin-bottom: 4px;
+}
+.crstrip-label { font-size: 0.72rem; color: var(--muted); line-height: 1.4; }
+
+@media (max-width: 900px) {
+  #collaboration { padding: 5rem 1.5rem; }
+  .collab-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .personas-grid { grid-template-columns: repeat(2, 1fr); }
+  .collab-results-strip { flex-direction: column; }
+}
+@media (max-width: 500px) {
+  .personas-grid { grid-template-columns: 1fr; }
+}
+
+
+/* ── SUBTLE BACKGROUND TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(124,110,247,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(232,201,107,0.03) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 100% at 50% 50%, rgba(124,110,247,0.02) 0%, transparent 80%);
+  pointer-events: none;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(124,110,247,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,110,247,0.025) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 0%, transparent 85%);
+  pointer-events: none;
+}
+
+
+/* ── TIGHTER SPACING FOR FULL SCREEN ── */
+@media (min-width: 1200px) {
+  .hero {
+    padding-top: 7rem;
+    padding-bottom: 3rem;
+    min-height: auto;
+  }
+  .hero-stats { margin-top: 2rem !important; }
+  section,
+  #services, #credentials, #collaboration,
+  #results, #approach, #contact {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+  .collab-intro-text { font-size: 0.9rem; }
+  .personas-grid { gap: 0.75rem; }
+  .persona-card { padding: 1.1rem 1rem; }
+  .badge-tier { margin-bottom: 2.5rem; }
+  .results-numbers .rn-text { padding: 1.25rem 1.5rem; }
+  .results-numbers .rn-num { padding: 1.25rem 1.5rem; font-size: 1.7rem; }
+  .hero-headline { font-size: clamp(2.8rem, 5vw, 4.8rem); }
+}
+
+
+/* ── RESULTS ROWS ── */
+.rr-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.rr-row:hover { background: var(--bg3); }
+.rr-left {
+  padding: 1.25rem 1.25rem;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+}
+.rr-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: var(--indigo-glow); border: 1px solid var(--border-bright);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 6px; flex-shrink: 0;
+}
+.rr-icon svg { width: 16px; height: 16px; color: var(--indigo); }
+.rr-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; line-height: 1; color: var(--indigo);
+  font-weight: 700; letter-spacing: -0.02em;
+}
+.rr-sublabel { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.rr-right { padding: 1.25rem 1.5rem; }
+.rr-title { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 4px; line-height: 1.3; }
+.rr-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.55; }
+
+/* ── CASE STUDY CARDS ── */
+.rr-case { padding: 2rem; background: var(--bg); }
+.rr-case-header { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1rem; }
+.rr-case-icon {
+  width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+  background: var(--indigo-glow); border: 1px solid var(--border-bright);
+  display: flex; align-items: center; justify-content: center;
+}
+.rr-case-icon svg { width: 20px; height: 20px; color: var(--indigo); }
+.rr-case-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--text); line-height: 1.25; margin-bottom: 4px; }
+.rr-case-sub { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+.rr-case-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+.rr-badge {
+  font-size: 0.68rem; font-weight: 600; padding: 3px 10px; border-radius: 2rem;
+  background: var(--indigo-glow); border: 1px solid var(--border-bright); color: var(--indigo);
+}
+.gold-badge { background: rgba(232,201,107,0.1) !important; border-color: rgba(232,201,107,0.3) !important; color: var(--gold) !important; }
+.rr-case-section-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--indigo); margin-bottom: 0.4rem; margin-top: 0.9rem; }
+.rr-case-body { font-size: 0.8rem; color: var(--muted); line-height: 1.65; }
+.rr-case-footer { font-size: 0.68rem; color: rgba(238,244,240,0.25); margin-top: 1rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+
+@media (max-width: 900px) {
+  #results > div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+  .rr-row { grid-template-columns: 120px 1fr; }
+}
+
+
+@media (max-width: 900px) {
+  .contact-layout { grid-template-columns: 1fr !important; gap: 2rem !important; }
+}
+
+
+/* ── RESULTS FULL-WIDTH ROWS ── */
+.rr-row-full {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.rr-row-full:hover { background: var(--bg3); }
+.rr-left2 {
+  padding: 1.5rem 1.5rem;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: center;
+  gap: 4px; background: var(--bg2);
+  transition: background 0.2s;
+}
+.rr-row-full:hover .rr-left2 { background: var(--bg3); }
+.rr-icon2 {
+  width: 34px; height: 34px; border-radius: 9px;
+  background: var(--indigo-glow); border: 1px solid var(--border-bright);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 8px; flex-shrink: 0;
+}
+.rr-icon2 svg { width: 16px; height: 16px; color: var(--indigo); }
+.rr-val2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; line-height: 1;
+  color: var(--indigo); font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.rr-sublabel2 {
+  font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted); margin-top: 2px;
+}
+.rr-right2 {
+  padding: 1.5rem 2rem;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.rr-title2 {
+  font-size: 0.9rem; font-weight: 600;
+  color: var(--text); margin-bottom: 5px; line-height: 1.3;
+}
+.rr-desc2 {
+  font-size: 0.8rem; color: var(--muted); line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .rr-row-full { grid-template-columns: 120px 1fr; }
+  #results { padding: 0 !important; }
+}
+
+
+/* ── LOGO STRIPS ── */
+.logo-strip {
+  display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+}
+.logo-img {
+  height: 28px; width: auto; object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.35;
+  transition: opacity 0.25s;
+}
+.logo-img:hover { opacity: 0.7; }
+.logo-img.light-bg {
+  filter: none; opacity: 0.55;
+}
+.cloud-logo-bar {
+  display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.cloud-logo-item {
+  display: flex; align-items: center; gap: 8px;
+}
+.cloud-logo-item img {
+  height: 22px; width: auto; object-fit: contain;
+  filter: brightness(0) invert(1); opacity: 0.5;
+  transition: opacity 0.2s;
+}
+.cloud-logo-item:hover img { opacity: 0.85; }
+.cloud-logo-item span {
+  font-size: 0.72rem; font-weight: 600;
+  color: var(--muted); letter-spacing: 0.05em;
+}
+
+</style>
+</head>
+<body>
+<nav>
+<div class="nav-wordmark">Sumaira <span>Nazir</span></div>
+<ul class="nav-links">
+<li><a href="#services">Services</a></li>
+<li><a href="#credentials">Credentials</a></li>
+<li><a href="#collaboration">Collaboration</a></li><li><a href="#results">Results</a></li>
+<li><a href="#approach">Approach</a></li>
+<li><a class="nav-pill" href="#contact">Work With Me</a></li>
+</ul>
+</nav>
+<section class="hero" id="top">
+<div class="hero-grid"></div>
+<div class="hero-glow"></div>
+<div class="hero-glow2"></div>
+<div class="hero-inner">
+<div class="hero-content">
+<div class="hero-eyebrow"><div class="hero-dot"></div>Cloud FinOps &amp; Product Strategy Leader · Available for engagements</div>
+<h1 class="hero-headline">Turning cloud cost<br/>into <span class="hl">measurable</span> <span class="gold">business value.</span></h1>
+<p class="hero-sub">Multi-cloud FinOps leadership at the intersection of engineering, finance, and product. $2.7M+ in annualized impact delivered across AWS, GCP, and Azure. Among the first 50 FinOps Certified Professionals globally, and the <em style="font-style:italic;color:var(--gold);">first and only</em> practitioner to also hold CGEIT.</p>
+<div class="hero-actions">
+<a class="btn-indigo" href="#contact">Discuss Your Cloud Cost Strategy →</a>
+<a class="btn-outline" href="#results">View Results</a>
+</div>
+</div>
+<!-- Right-side hero panel: org bar, quote card with portrait, cloud logos -->
+<aside class="hero-panel">
+<div class="hero-org-bar">
+<img alt="ISACA" src="https://i.ibb.co/tTTY3MLY/image.png"/>
+<div class="hero-org-divider"></div>
+<img alt="FinOps Foundation" src="https://i.ibb.co/gLv92GPw/image.png"/>
+<div class="hero-org-divider"></div>
+<img alt="PMI" src="https://wp.logos-download.com/wp-content/uploads/2021/01/Project_Management_Institute_Logo.png?dl"/>
+</div>
+<div class="hero-card-row">
+<div class="hero-quote-card">
+<span class="hero-quote-mark">“</span>
+<p class="hero-quote-text">The best cloud cost work happens when finance, engineering, and product sit at the same table — and speak the <em>same language.</em></p>
+<div class="hero-quote-bar"></div>
+</div>
+<div class="hero-portrait-wrap">
+<img alt="Sumaira Nazir" class="hero-portrait" src="https://i.ibb.co/7drpFStR/image.png"/>
+<div class="hero-portrait-name">
+<span class="hero-portrait-name-text">Sumaira Nazir <span class="hero-cert-sep">|</span> CGEIT <span class="hero-cert-sep">|</span> PMP</span>
+<span class="hero-portrait-name-title">Certified FinOps Pro. &amp; Technical Product Owner</span>
+</div>
+</div>
+</div>
+<div class="hero-cloud-row">
+<img alt="AWS" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"/>
+<img alt="Google Cloud" src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg"/>
+<img alt="Microsoft Azure" src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Microsoft_Azure_Logo.svg"/>
+</div>
+</aside>
+</div><!-- /hero-inner -->
+<div class="hero-stats" style="margin-top:3rem;">
+<div class="hero-stat"><div style="color:var(--gold);opacity:0.6;margin-bottom:6px;width:24px;height:24px;"><svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><line x1="12" x2="12" y1="1" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div><div class="hs-num">$2.7M+</div><div class="hs-label">Delivered together with engineering &amp; finance teams</div></div>
+<div class="hero-stat"><div style="color:var(--indigo);opacity:0.6;margin-bottom:6px;width:24px;height:24px;"><svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg></div><div class="hs-num">~$1.5M</div><div class="hs-label">Multi-cloud spend managed collaboratively</div></div>
+<div class="hero-stat"><div style="color:var(--gold);opacity:0.6;margin-bottom:6px;width:24px;height:24px;"><svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg></div><div class="hs-num">#&lt;50</div><div class="hs-label">Among the first 50 FinOps Certified Professionals worldwide</div></div>
+<div class="hero-stat"><div style="color:var(--indigo);opacity:0.6;margin-bottom:6px;width:24px;height:24px;"><svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><rect height="8" rx="2" width="20" x="2" y="2"></rect><rect height="8" rx="2" width="20" x="2" y="14"></rect><line x1="6" x2="6.01" y1="6" y2="6"></line><line x1="6" x2="6.01" y1="18" y2="18"></line></svg></div><div class="hs-num">5</div><div class="hs-label">Major clouds (AWS, GCP, Azure, OVH, IBM)</div></div>
+</div>
+</section>
+<div class="expertise-strip">
+<div class="strip-label">Core Expertise</div>
+<div class="strip-tags">
+<span class="strip-tag">FOCUS / Open Cost Standard</span>
+<span class="strip-tag">COGS, Unit Economics &amp; Cost Modeling</span>
+<span class="strip-tag">Commitment &amp; Coverage Optimization</span>
+<span class="strip-tag">Container Density</span>
+<span class="strip-tag">GreenOps &amp; Carbon Intensity</span>
+<span class="strip-tag">AI Workload &amp; GPU FinOps</span>
+<span class="strip-tag">Proactive Anomaly Detection &amp; Cost Intelligence</span>
+<span class="strip-tag">Anomaly Detection</span>
+<span class="strip-tag">Vendor Negotiations</span>
+<span class="strip-tag">Executive KPI Design</span>
+</div>
+</div>
+<section id="services">
+<div class="s-eyebrow">What I Do</div>
+<h2 class="s-title">Where cloud economics becomes business advantage</h2>
+<div class="services-grid">
+<div class="svc"><span class="svc-num">01</span><div class="svc-icon-svg"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg></div><div class="svc-name">Multi-Cloud Cost Strategy &amp; Commitments</div><div class="svc-desc">Executive-level strategy across AWS, GCP, Azure, OVH, and IBM. Focused on commitment planning, vendor trade-offs, pricing leverage, and spend predictability at scale.</div></div>
+<div class="svc"><span class="svc-num">02</span><div class="svc-icon-svg"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><line x1="18" x2="18" y1="20" y2="10"></line><line x1="12" x2="12" y1="20" y2="4"></line><line x1="6" x2="6" y1="20" y2="14"></line><line x1="2" x2="22" y1="20" y2="20"></line></svg></div><div class="svc-name">COGS, Unit Economics &amp; Cost Modeling</div><div class="svc-desc">FOCUS-aligned allocation models that connect cloud spend to products, customers, features, and margins. Built with data teams using dbt, BigQuery, and executive-ready KPIs.</div></div>
+<div class="svc"><span class="svc-num">03</span><div class="svc-icon">⇲</div><div class="svc-name">Proactive Anomaly Detection &amp; Cost Intelligence</div><div class="svc-desc">Early detection, root-cause analysis, and cost intelligence embedded into engineering workflows. Designed to move teams from reactive reporting to proactive cost control.</div></div>
+<div class="svc"><span class="svc-num">04</span><div class="svc-icon-svg"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><rect height="14" rx="2" width="20" x="2" y="7"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div><div class="svc-name">Container, Storage &amp; Platform Efficiency</div><div class="svc-desc">Container density, host footprint reduction, Ceph optimization, and snapshot hygiene. Structural savings designed to improve platform margin and persist beyond quarter-end.</div></div>
+<div class="svc"><span class="svc-num">05</span><div class="svc-icon-svg"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><rect height="10" rx="2" width="18" x="3" y="11"></rect><path d="M12 3v4M8 3v2M16 3v2"></path><circle cx="8.5" cy="16" fill="currentColor" r="1.5" stroke="none"></circle><circle cx="15.5" cy="16" fill="currentColor" r="1.5" stroke="none"></circle><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></div><div class="svc-name">AI Workload &amp; GPU FinOps</div><div class="svc-desc">Cost modeling for AI workloads including GPU usage, inference, token-based consumption, and experimentation guardrails. Built for visibility, efficiency, and scalable AI adoption.</div></div>
+<div class="svc"><span class="svc-num">06</span><div class="svc-icon-svg"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg></div><div class="svc-name">GreenOps &amp; Executive Sustainability Reporting</div><div class="svc-desc">Executive sustainability reporting that links workload placement, regional efficiency, and cloud cost. Includes green-region analysis and recommendations for EXCO decision-making.</div></div>
+<div class="svc" style="grid-column:span 3;border-top:1px solid var(--border);background:var(--bg2);"><span class="svc-num">07</span><div style="display:flex;gap:2rem;align-items:flex-start;"><div class="svc-icon" style="flex-shrink:0;">⬗</div><div><div class="svc-name">Usage-Based Pricing &amp; Product Margin Strategy</div><div class="svc-desc">Partnering with product, engineering, and finance to design pricing models that reflect real unit costs, protect gross margin, and support scalable product decisions.</div></div></div>
+<div class="svc" style="grid-column:span 3;border-top:1px solid var(--border);background:linear-gradient(135deg,rgba(124,110,247,0.06),rgba(232,201,107,0.04));"><span class="svc-num">08</span><div style="display:flex;gap:2rem;align-items:flex-start;"><div class="svc-icon-svg" style="flex-shrink:0;background:rgba(232,201,107,0.1);border-color:rgba(232,201,107,0.3);"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div><div><div class="svc-name" style="color:var(--gold);">FinOps Champion Program</div><div class="svc-desc">Introduced and operationalized a FinOps Champion Program, distributing cost ownership and accountability across engineering and product teams. Champions embedded within each team drive tagging compliance, anomaly response, and optimization adoption, transforming FinOps from a central function into a company-wide discipline.</div></div></div></div>
+</div>
+</div>
+</section>
+<section id="credentials">
+<div class="cred-intro">
+<div>
+<div class="s-eyebrow">Credentials</div>
+<h2 class="s-title">The depth to advise, the credentials to back it up</h2>
+</div>
+<div class="cred-right-text">
+<p style="color:var(--muted);font-size:0.95rem;line-height:1.8;">Nine active certifications spanning the full spectrum of cloud financial strategy, governance, and AI. Among the first 50 FinOps Certified Professionals globally — and uniquely, the <strong style="color:var(--text);font-weight:600;">first and only FinOps professional worldwide</strong> to also hold CGEIT from ISACA, meaning I can bridge cloud economics with enterprise governance in ways most practitioners can't.</p>
+<div class="cloud-bars" style="margin-top:2rem;">
+<div class="cloud-bar"><div class="cloud-bar-header"><span class="cloud-bar-name">AWS</span><span class="cloud-bar-val">Primary</span></div><div class="cloud-bar-track"><div class="cloud-bar-fill" style="width:92%"></div></div></div>
+<div class="cloud-bar"><div class="cloud-bar-header"><span class="cloud-bar-name">Google Cloud</span><span class="cloud-bar-val">Advanced</span></div><div class="cloud-bar-track"><div class="cloud-bar-fill" style="width:80%"></div></div></div>
+<div class="cloud-bar"><div class="cloud-bar-header"><span class="cloud-bar-name">Azure</span><span class="cloud-bar-val">Advanced</span></div><div class="cloud-bar-track"><div class="cloud-bar-fill" style="width:75%"></div></div></div>
+</div>
+</div>
+</div>
+<!-- UNIQUE DISTINCTION CALLOUT -->
+<div style="margin-bottom:3rem;padding:1.5rem 2rem;background:linear-gradient(135deg,rgba(124,110,247,0.08),rgba(232,201,107,0.06));border:1px solid rgba(232,201,107,0.25);border-radius:16px;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;">
+<div style="flex:1;min-width:260px;">
+<div style="font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">A Unique Combination — Worldwide</div>
+<div style="font-family:'Playfair Display',serif;font-size:1.3rem;line-height:1.3;color:var(--text);">The first and only FinOps Certified Professional<br/>to also hold <em>CGEIT</em> — bridging cloud economics with enterprise IT governance.</div>
+</div>
+<div style="display:flex;gap:1.5rem;align-items:center;">
+<div style="text-align:center;">
+<div style="font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">Cloud Financial Strategy</div>
+<img alt="FinOps Foundation" src="https://i.ibb.co/gLv92GPw/image.png" style="height:16px;width:auto;filter:brightness(0) invert(1);opacity:0.6;margin-bottom:3px;display:block;"/><div style="font-size:0.78rem;color:var(--indigo);font-weight:600;">FinOps Foundation</div>
+</div>
+<div style="width:1px;height:40px;background:var(--border);"></div>
+<div style="text-align:center;">
+<div style="font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">IT Governance</div>
+<img alt="IT Governance" src="https://i.ibb.co/8DNrHnHr/image.png" style="height:18px;width:auto;filter:brightness(0) invert(1);opacity:0.6;margin-bottom:3px;display:block;margin-left:auto;margin-right:auto;"/><div style="font-size:0.78rem;color:var(--gold);font-weight:600;">ISACA — CGEIT</div>
+</div>
+<div style="width:1px;height:40px;background:var(--border);"></div>
+<div style="text-align:center;">
+<div style="font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">Globally recognized</div>
+<div style="font-size:0.78rem;color:var(--text);font-weight:600;">Top 50 worldwide</div>
+</div>
+</div>
+</div>
+<!-- TIER 1: FLAGSHIP -->
+<div class="badge-tier">
+<div class="tier-label">Flagship Certifications</div>
+<div class="badges-row" style="gap:1.25rem;flex-wrap:wrap;">
+<div onmouseout="this.style.transform='translateY(0)'" onmouseover="this.style.transform='translateY(-4px)'" style="width:120px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:default;transition:transform 0.2s;">
+<img alt="FinOps Certified Professional" src="https://images.credly.com/images/5f226770-5930-4afd-b040-8bf266b50f8e/image.png" style="width:100px;height:100px;object-fit:contain;border-radius:10px;background:#fff;padding:5px;filter:drop-shadow(0 0 10px rgba(124,110,247,0.4));"/>
+<span style="font-size:0.68rem;font-weight:600;color:var(--muted);text-align:center;line-height:1.3;max-width:110px;color:var(--indigo);">FinOps Certified Professional<span style="font-size:0.6rem;color:rgba(238,244,240,0.3);display:block;margin-top:2px;">Top 50 globally</span></span>
+</div>
+<div onmouseout="this.style.transform='translateY(0)'" onmouseover="this.style.transform='translateY(-4px)'" style="width:120px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:default;transition:transform 0.2s;">
+<img alt="CGEIT — IT Governance" src="https://images.credly.com/images/fae5b907-04c2-4013-abbd-b469dd337bb8/58378d269383d34bde29a49abfd59e643a0f12a8.png" style="width:100px;height:100px;object-fit:contain;border-radius:10px;background:#fff;padding:5px;filter:drop-shadow(0 0 10px rgba(124,110,247,0.4));"/>
+<span style="font-size:0.68rem;font-weight:600;color:var(--muted);text-align:center;line-height:1.3;max-width:110px;color:var(--indigo);">CGEIT — IT Governance<span style="font-size:0.6rem;color:var(--gold);display:block;margin-top:2px;display:flex;align-items:center;gap:5px;"><img alt="FinOps Foundation" src="https://i.ibb.co/gLv92GPw/image.png" style="height:10px;width:auto;filter:brightness(0) invert(1);opacity:0.5;"/>First &amp; only FinOps + CGEIT</span></span>
+</div>
+<div onmouseout="this.style.transform='translateY(0)'" onmouseover="this.style.transform='translateY(-4px)'" style="width:120px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:default;transition:transform 0.2s;">
+<img alt="PMP — Project Management" src="https://images.credly.com/images/731e7ef4-9b0c-4d7b-ab65-23cc699c0aa3/blob" style="width:100px;height:100px;object-fit:contain;border-radius:10px;background:#fff;padding:5px;"/>
+<span style="font-size:0.68rem;font-weight:600;color:var(--muted);text-align:center;line-height:1.3;max-width:110px;color:var(--muted);">PMP — Project Management</span>
+</div>
+<div onmouseout="this.style.transform='translateY(0)'" onmouseover="this.style.transform='translateY(-4px)'" style="width:120px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:default;transition:transform 0.2s;">
+<img alt="Certified Scrum Master" src="https://i.ibb.co/XfQWNHq0/image.png" style="width:100px;height:100px;object-fit:contain;border-radius:10px;mix-blend-mode:screen;"/>
+<span style="font-size:0.68rem;font-weight:600;color:var(--muted);text-align:center;line-height:1.3;max-width:110px;color:var(--muted);">Certified Scrum Master<span style="font-size:0.6rem;color:rgba(238,244,240,0.3);display:block;margin-top:2px;">Scrum Institute</span></span>
+</div>
+<div onmouseout="this.style.transform='translateY(0)'" onmouseover="this.style.transform='translateY(-4px)'" style="width:120px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:default;transition:transform 0.2s;">
+<img alt="Gen AI for Project Managers" src="https://images.credly.com/images/f5c094f4-e07c-44e0-b685-4ffd8980fd53/blob" style="width:100px;height:100px;object-fit:contain;border-radius:10px;background:#fff;padding:5px;"/>
+<span style="font-size:0.68rem;font-weight:600;color:var(--muted);text-align:center;line-height:1.3;max-width:110px;color:var(--muted);">Gen AI for Project Managers<span style="font-size:0.6rem;color:rgba(238,244,240,0.3);display:block;margin-top:2px;">PMI</span></span>
+</div>
+</div>
+</div>
+<!-- TIER 2: FINOPS SPECIALIZATIONS -->
+<div class="badge-tier">
+<div class="tier-label">FinOps Specializations</div>
+<div class="badges-row" style="gap:1.25rem;flex-wrap:wrap;">
+<div onmouseout="this.style.transform='translateY(0)'" onmouseover="this.style.transform='translateY(-4px)'" style="width:120px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:default;transition:transform 0.2s;">
+<img alt="FinOps Certified for AI" src="https://www.finops.org/wp-content/uploads/2025/11/certified-finopsforAI-lg.svg" style="width:100px;height:100px;object-fit:contain;border-radius:10px;background:#fff;padding:5px;"/>
+<span style="font-size:0.68rem;font-weight:600;color:var(--muted);text-align:center;line-height:1.3;max-width:110px;color:var(--muted);">FinOps Certified for AI</span>
+</div>
+<div onmouseout="this.style.transform='translateY(0)'" onmouseover="this.style.transform='translateY(-4px)'" style="width:120px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:default;transition:transform 0.2s;">
+<img alt="FOCUS Analyst" src="https://images.credly.com/images/c28f46e1-b0cf-4581-a963-d04db79cd39c/image.png" style="width:100px;height:100px;object-fit:contain;border-radius:10px;background:#fff;padding:5px;"/>
+<span style="font-size:0.68rem;font-weight:600;color:var(--muted);text-align:center;line-height:1.3;max-width:110px;color:var(--muted);">FOCUS Analyst</span>
+</div>
+<div onmouseout="this.style.transform='translateY(0)'" onmouseover="this.style.transform='translateY(-4px)'" style="width:120px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:default;transition:transform 0.2s;">
+<img alt="FinOps Practitioner" src="https://images.credly.com/images/08a5010a-0c0a-448c-981e-c116fedd380c/image.png" style="width:100px;height:100px;object-fit:contain;border-radius:10px;background:#fff;padding:5px;"/>
+<span style="font-size:0.68rem;font-weight:600;color:var(--muted);text-align:center;line-height:1.3;max-width:110px;color:var(--muted);">FinOps Practitioner</span>
+</div>
+<div onmouseout="this.style.transform='translateY(0)'" onmouseover="this.style.transform='translateY(-4px)'" style="width:120px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:default;transition:transform 0.2s;">
+<img alt="FinOps for Containers" src="https://i.ibb.co/s9mGmmRK/image.png" style="width:100px;height:100px;object-fit:contain;border-radius:10px;mix-blend-mode:screen;"/>
+<span style="font-size:0.68rem;font-weight:600;color:var(--muted);text-align:center;line-height:1.3;max-width:110px;color:var(--muted);">FinOps for Containers</span>
+</div>
+</div>
+</div>
+<div class="foundation-box" style="max-width:700px;">
+<div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
+<img alt="FinOps Foundation" src="https://i.ibb.co/gLv92GPw/image.png" style="height:22px;width:auto;filter:brightness(0) invert(1);opacity:0.5;"/>
+<div class="foundation-box-label" style="margin-bottom:0;">Professional Contributions to the FinOps Framework</div>
+</div>
+<div class="foundation-tags">
+<a class="foundation-tag foundation-tag-link" href="https://focus.finops.org/?_gl=1%2A1f8hhya%2A_ga%2AMTI3OTI5ODg0MS4xNzcxOTgyNTky%2A_ga_GMZRP0N4XX%2AczE3NzY5OTk1MzIkbzQxJGcxJHQxNzc2OTk5ODYwJGo2MCRsMCRoMA.." target="_blank">FOCUS Working Group ↗</a>
+<a class="foundation-tag foundation-tag-link" href="https://www.finops.org/wg/commitment-based-discounts-overview/" target="_blank">Commitment Based Discounts SIG ↗</a>
+<span class="foundation-tag">Anomaly Detection SIG</span>
+<span class="foundation-tag">Mentorship Program</span>
+<a class="foundation-tag foundation-tag-link" href="https://www.finops.org/wg/applying-the-finops-framework-to-saas/" target="_blank">Applying FinOps to SaaS ↗</a>
+</div>
+</div>
+</section>
+<section id="collaboration">
+<div class="collab-layout">
+<div>
+<div class="s-eyebrow">Who I Work With</div>
+<h2 class="s-title">Driving alignment across engineering, finance, and product</h2>
+<p class="collab-intro-text">Focus areas include unit economics, cost-to-product mapping, proactive anomaly detection, and engineering-driven optimization.</p>
+<p class="collab-intro-text" style="margin-top:1rem;">
+        Every engagement spans multiple personas. The savings happen in
+        the infrastructure. The decisions happen in the boardroom.
+        The culture shift happens everywhere in between.
+      </p>
+<div class="collab-results-strip" style="margin-top:2.5rem;">
+<div class="crstrip-item">
+<div class="crstrip-val">8+</div>
+<div class="crstrip-label">Stakeholder types engaged per engagement</div>
+</div>
+<div class="crstrip-item">
+<div class="crstrip-val">3</div>
+<div class="crstrip-label">Functions bridged: Finance, Eng &amp; Product</div>
+</div>
+<div class="crstrip-item">
+<div class="crstrip-val">C→IC</div>
+<div class="crstrip-label">Fluent from C-suite to individual contributor</div>
+</div>
+</div>
+</div>
+<div>
+<div class="personas-grid">
+<div class="persona-card">
+<div class="persona-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><line x1="12" x2="12" y1="1" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+<div class="persona-dept">Executive Finance</div>
+<div class="persona-title">Chief Financial Officer</div>
+<div class="persona-collab">Translating cloud spend into P&amp;L impact, gross margin visibility, and board-ready financial narratives.</div>
+</div>
+<div class="persona-card">
+<div class="persona-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><rect height="8" rx="2" width="20" x="2" y="2"></rect><rect height="8" rx="2" width="20" x="2" y="14"></rect><line x1="6" x2="6.01" y1="6" y2="6"></line><line x1="6" x2="6.01" y1="18" y2="18"></line></svg></div>
+<div class="persona-dept">Technology Leadership</div>
+<div class="persona-title">Chief Technology Officer</div>
+<div class="persona-collab">Aligning infrastructure architecture decisions with cost-aware engineering strategy and long-term scalability.</div>
+</div>
+<div class="persona-card">
+<div class="persona-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg></div>
+<div class="persona-dept">Infrastructure</div>
+<div class="persona-title">Sr. Directors of Infrastructure</div>
+<div class="persona-collab">Co-designing density improvements, commitment strategy, and shift-left cost frameworks with the teams who own the stack.</div>
+</div>
+<div class="persona-card">
+<div class="persona-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+<div class="persona-dept">Cloud Partnerships</div>
+<div class="persona-title">Cloud Vendors</div>
+<div class="persona-collab">Leading negotiations with AWS, GCP, Azure, OVH, and IBM — securing better pricing, commitment terms, and strategic alignment.</div>
+</div>
+<div class="persona-card">
+<div class="persona-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg></div>
+<div class="persona-dept">Product Leadership</div>
+<div class="persona-title">VP of Product</div>
+<div class="persona-collab">Building COGS and unit economics models that connect cloud costs to product pricing decisions and feature-level margin.</div>
+</div>
+<div class="persona-card">
+<div class="persona-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" x2="22" y1="12" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
+<div class="persona-dept">Partnerships</div>
+<div class="persona-title">Global Alliance Teams</div>
+<div class="persona-collab">Coordinating cross-cloud and cross-vendor financial strategy across complex multi-partner and reseller environments.</div>
+</div>
+<div class="persona-card">
+<div class="persona-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><line x1="18" x2="18" y1="20" y2="10"></line><line x1="12" x2="12" y1="20" y2="4"></line><line x1="6" x2="6" y1="20" y2="14"></line><line x1="2" x2="22" y1="20" y2="20"></line></svg></div>
+<div class="persona-dept">Financial Planning</div>
+<div class="persona-title">FP&amp;A Directors</div>
+<div class="persona-collab">Delivering cloud budgeting models, variance analysis, and forecasting frameworks that integrate with existing FP&amp;A cycles.</div>
+</div>
+<div class="persona-card">
+<div class="persona-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+<div class="persona-dept">Risk &amp; Compliance</div>
+<div class="persona-title">Audit &amp; Compliance Leads</div>
+<div class="persona-collab">Designing tagging standards, chargeback models, and governance controls that satisfy audit requirements and risk frameworks.</div>
+</div>
+<div class="persona-card" style="background:linear-gradient(135deg,rgba(124,110,247,0.08),rgba(232,201,107,0.05));border-color:rgba(124,110,247,0.25);">
+<div class="persona-icon" style="background:rgba(232,201,107,0.12);border-color:rgba(232,201,107,0.3);">
+<svg fill="none" stroke="var(--gold)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+</div>
+<div class="persona-dept" style="color:var(--gold);">Your Team</div>
+<div class="persona-title">Your Organization</div>
+<div class="persona-collab">Every engagement is shaped around your team's structure, maturity, and goals — not a one-size-fits-all playbook.</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="results" style="padding:0;">
+<div style="padding:3rem 3.5rem 2rem;">
+<div class="s-eyebrow">Proof of Work — 2025</div>
+<h2 class="s-title" style="margin-top:0.5rem;">Real results, built with real teams</h2>
+</div>
+<!-- Cloud context bar -->
+<div style="padding:1rem 3.5rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2);display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
+<span style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);">Delivered across</span>
+<div style="display:flex;align-items:center;gap:1.5rem;">
+<img alt="AWS" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" style="height:18px;width:auto;filter:brightness(0) invert(1);opacity:0.45;"/>
+<img alt="GCP" src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" style="height:18px;width:auto;filter:brightness(0) invert(1);opacity:0.45;"/>
+<img alt="Azure" src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Microsoft_Azure_Logo.svg" style="height:18px;width:auto;filter:brightness(0) invert(1);opacity:0.45;"/>
+</div>
+<div style="width:1px;height:20px;background:var(--border);"></div>
+<span style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);">Recognized by</span>
+<div style="display:flex;align-items:center;gap:1.5rem;">
+<img alt="FinOps Foundation" src="https://i.ibb.co/gLv92GPw/image.png" style="height:16px;width:auto;filter:brightness(0) invert(1);opacity:0.4;"/>
+<img alt="ISACA" src="https://i.ibb.co/tTTY3MLY/image.png" style="height:16px;width:auto;filter:brightness(0) invert(1);opacity:0.4;"/>
+</div>
+</div>
+<div>
+<div class="rr-row-full">
+<div class="rr-left2">
+<div class="rr-icon2"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><rect height="8" rx="2" width="20" x="2" y="2"></rect><rect height="8" rx="2" width="20" x="2" y="14"></rect><line x1="6" x2="6.01" y1="6" y2="6"></line><line x1="6" x2="6.01" y1="18" y2="18"></line></svg></div>
+<div class="rr-val2">$2.7M+</div>
+<div class="rr-sublabel2">Total savings</div>
+</div>
+<div class="rr-right2">
+<div class="rr-title2">Delivered multi-cloud efficiency with Finance, Engineering &amp; Product</div>
+<div class="rr-desc2">Drove structural cost optimization across AWS, GCP &amp; Azure — right-sized containers, optimized Ceph storage and cleaned up snapshots beyond commitment coverage.</div>
+</div>
+</div>
+<div class="rr-row-full">
+<div class="rr-left2">
+<div class="rr-icon2"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><line x1="12" x2="12" y1="1" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+<div class="rr-val2">$1.2M+</div>
+<div class="rr-sublabel2">Annual savings</div>
+</div>
+<div class="rr-right2">
+<div class="rr-title2">Optimized commitment strategy with Finance partnership</div>
+<div class="rr-desc2">Balanced RI/SP coverage with Finance and Engineering to minimize waste, improve cash efficiency, and resolve multi-currency FX discrepancies for accurate cost reporting.</div>
+</div>
+</div>
+<div class="rr-row-full">
+<div class="rr-left2">
+<div class="rr-icon2"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+<div class="rr-val2">99%</div>
+<div class="rr-sublabel2">Allocation accuracy</div>
+</div>
+<div class="rr-right2">
+<div class="rr-title2">Built FOCUS-aligned cost allocation with Data team</div>
+<div class="rr-desc2">Partnered with Eng./Data Teams to design and operationalize FOCUS-compliant cost models in dbt + BigQuery, achieving 99% allocation accuracy and strong financial accountability.</div>
+</div>
+</div>
+<div class="rr-row-full">
+<div class="rr-left2">
+<div class="rr-icon2"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div>
+<div class="rr-val2">+1%</div>
+<div class="rr-sublabel2">EDP uplift</div>
+</div>
+<div class="rr-right2">
+<div class="rr-title2">Increased EDP discount through negotiation &amp; trade-offs</div>
+<div class="rr-desc2">Partnered with CFO and FP&amp;A leads to model scenarios (partial vs full upfront, workload placement, commitment mix) and secured 1% additional EDP discount.</div>
+</div>
+</div>
+<div class="rr-row-full">
+<div class="rr-left2">
+<div class="rr-icon2"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg></div>
+<div class="rr-val2">3.8</div>
+<div class="rr-sublabel2">GCP Optimization Score</div>
+</div>
+<div class="rr-right2">
+<div class="rr-title2">Improved GCP Optimization Score to 3.8 (vs. 3.2 benchmark)</div>
+<div class="rr-desc2">Partnered with Engineering to right-size resources, remove idle assets, and improve cloud health, outperforming industry benchmarks.</div>
+</div>
+</div>
+<div class="rr-row-full">
+<div class="rr-left2">
+<div class="rr-icon2"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg></div>
+<div class="rr-val2" style="font-size:0.95rem;line-height:1.25;">PaaS Product<br/>Strategy</div>
+<div class="rr-sublabel2"> </div>
+</div>
+<div class="rr-right2">
+<div class="rr-title2">PaaS product &amp; pricing strategy with Product &amp; Finance</div>
+<div class="rr-desc2">Played a key role in the Platform.sh to Upsun brand transition, aligning pricing with infrastructure cost and partnering with Product and Engineering to reduce waste, embed cost discipline, and support margin and growth improvements through incentive-aligned structures.</div>
+</div>
+</div>
+<div class="rr-row-full">
+<div class="rr-left2">
+<div class="rr-icon2"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><line x1="18" x2="18" y1="20" y2="10"></line><line x1="12" x2="12" y1="20" y2="4"></line><line x1="6" x2="6" y1="20" y2="14"></line><line x1="2" x2="22" y1="20" y2="20"></line></svg></div>
+<div class="rr-val2" style="font-size:0.95rem;line-height:1.25;">Gross Margin<br/>Optimization</div>
+<div class="rr-sublabel2"> </div>
+</div>
+<div class="rr-right2">
+<div class="rr-title2">Partnered with Product &amp; RevOps to improve gross margin</div>
+<div class="rr-desc2">Designed tiered partner incentive structures (discounts, commissions, free licenses) that balanced growth with margin improvement.</div>
+</div>
+</div>
+</div>
+<div class="rr-row-full">
+<div class="rr-left2">
+<div class="rr-icon2"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" x2="12" y1="9" y2="13"></line><line x1="12" x2="12.01" y1="17" y2="17"></line></svg></div>
+<div class="rr-val2" style="font-size:0.95rem;line-height:1.25;">Proactive Anomaly<br/>Detection</div>
+<div class="rr-sublabel2"> </div>
+</div>
+<div class="rr-right2">
+<div class="rr-title2">Created anomaly detection for cloud cost</div>
+<div class="rr-desc2">Built anomaly detection on cost, usage &amp; performance metrics to identify issues (e.g., container bugs, runaway costs) before they impacted the business.</div>
+</div>
+</div>
+<div class="rr-row-full">
+<div class="rr-left2">
+<div class="rr-icon2"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg></div>
+<div class="rr-val2" style="font-size:0.95rem;line-height:1.25;">Sustainability<br/>Impact</div>
+<div class="rr-sublabel2"> </div>
+</div>
+<div class="rr-right2">
+<div class="rr-title2">Executive sustainability reporting &amp; green workload strategy</div>
+<div class="rr-desc2">Produced EXCO-level sustainability reports (Scope 1–3), identified green regions and workload shift opportunities to reduce carbon footprint and cloud spend.</div>
+</div>
+</div>
+<div class="rr-row-full" style="border-bottom:none;">
+<div class="rr-left2">
+<div class="rr-icon2"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+<div class="rr-val2">5+</div>
+<div class="rr-sublabel2">Cross-functional teams</div>
+</div>
+<div class="rr-right2">
+<div class="rr-title2">Delivered results through true collaboration</div>
+<div class="rr-desc2">Partnered across Finance, Product, Engineering, SRE, Data, RevOps, Sales &amp; Procurement to turn data into action and strategy into measurable business impact.</div>
+</div>
+</div>
+</section>
+<section id="approach">
+<div class="approach-layout">
+<div>
+<div class="s-eyebrow">How I Work</div>
+<h2 class="s-title">A practical operating model for cloud cost leadership</h2>
+<div style="margin-top:2.5rem;">
+<div class="ap-step"><div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:2px;"><div class="ap-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg></div><span style="font-family:'Playfair Display',serif;font-size:0.75rem;color:var(--indigo);opacity:0.4;font-style:italic;">01</span></div><div><div class="ap-title">Discover</div><div class="ap-desc">Analyze cloud usage, architecture, allocation quality, and business context to identify the true cost drivers behind spend.</div></div></div>
+<div class="ap-step"><div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:2px;"><div class="ap-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div><span style="font-family:'Playfair Display',serif;font-size:0.75rem;color:var(--indigo);opacity:0.4;font-style:italic;">02</span></div><div><div class="ap-title">Model</div><div class="ap-desc">Build cost allocation, unit economics, and product-level reporting models with finance, engineering, and data teams.</div></div></div>
+<div class="ap-step"><div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:2px;"><div class="ap-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg></div><span style="font-family:'Playfair Display',serif;font-size:0.75rem;color:var(--indigo);opacity:0.4;font-style:italic;">03</span></div><div><div class="ap-title">Optimize</div><div class="ap-desc">Prioritize high-impact opportunities across commitments, compute, storage, containers, network, observability, and vendor terms.</div></div></div>
+<div class="ap-step"><div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:2px;"><div class="ap-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div><span style="font-family:'Playfair Display',serif;font-size:0.75rem;color:var(--indigo);opacity:0.4;font-style:italic;">04</span></div><div><div class="ap-title">Operationalize</div><div class="ap-desc">Embed dashboards, governance, anomaly detection, accountability, and executive reporting into the way teams work.</div></div></div>
+</div>
+</div>
+<div class="approach-right">
+<div class="s-eyebrow">Philosophy</div>
+<div class="approach-philosophy">Cost is not just a finance metric.<br/>It is a <span class="em">product and engineering signal.</span></div>
+<p class="approach-note">I help teams make cloud cost visible, explainable, and actionable. When cost is connected to architecture, product usage, and business value, it improves decisions, margins, and sustainable growth. Not a report handed over at quarter-end.</p>
+</div>
+</div>
+</section>
+<section id="contact">
+<div class="contact-layout">
+<div class="contact-left">
+<div class="s-eyebrow">Let's Talk</div>
+<h2 class="contact-headline">Let’s optimize your cloud cost strategy.</h2>
+<p class="contact-sub">Whether your team is facing runaway spend, preparing for a vendor negotiation, building product-level cost visibility, or scaling FinOps maturity, I can help turn cloud cost into measurable business value.</p>
+<div class="contact-links">
+<a class="cl-item" href="mailto:nazirsumaira93@gmail.com"><div class="cl-icon-svg"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><rect height="16" rx="2" width="20" x="2" y="4"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg></div><div><div class="cl-label">Email</div><div class="cl-value">nazirsumaira93@gmail.com</div></div></a>
+<a class="cl-item" href="https://www.linkedin.com/in/sumairanazir93" target="_blank"><div class="cl-icon-svg"><svg fill="currentColor" viewbox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect height="12" width="4" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></div><div><div class="cl-label">LinkedIn</div><div class="cl-value">linkedin.com/in/sumairanazir93</div></div></a>
+<div class="cl-item" style="cursor:default;"><div class="cl-icon-svg"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg></div><div><div class="cl-label">Location</div><div class="cl-value">Waterloo, Ontario, Canada</div></div></div>
+</div>
+</div>
+</div>
+</section>
+<footer>
+<div class="footer-wm">Sumaira <span>Nazir</span></div>
+<p class="footer-copy">FinOps Consulting · Waterloo, Canada</p>
+<div class="footer-links"><a href="https://www.linkedin.com/in/sumairanazir93" target="_blank">LinkedIn</a><a href="mailto:nazirsumaira93@gmail.com">Email</a></div>
+</footer>
+</body>
+</html>
