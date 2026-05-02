@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Sumaira Nazir — FinOps Consultant</title>
+<title>Sumaira Nazir — AI FinOps & Cloud Cost Strategy</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&amp;family=Manrope:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -746,6 +746,45 @@ body::after {
   color: var(--muted); letter-spacing: 0.05em;
 }
 
+
+
+/* ── AI PROJECTS SECTION ── */
+#ai-projects{padding:7rem 3.5rem;background:var(--bg);border-top:1px solid var(--border);position:relative;overflow:hidden;}
+#ai-projects::before{content:'';position:absolute;top:-220px;right:-220px;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(124,110,247,0.08) 0%,transparent 70%);pointer-events:none;}
+.ai-projects-intro{color:var(--muted);font-size:0.95rem;line-height:1.8;margin-top:1.25rem;max-width:760px;}
+.ai-project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-top:3rem;position:relative;}
+.ai-project-card{background:var(--bg2);padding:2.5rem;position:relative;overflow:hidden;transition:background 0.3s,transform 0.25s;}
+.ai-project-card:hover{background:var(--bg3);}
+.ai-project-top{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.25rem;}
+.ai-project-icon{width:48px;height:48px;border-radius:14px;background:var(--indigo-glow);border:1px solid var(--border-bright);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.ai-project-num{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--indigo);line-height:1;margin-top:4px;opacity:0.85;}
+.ai-project-title{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--text);line-height:1.2;margin-bottom:0.4rem;}
+.ai-project-badge{display:inline-flex;align-items:center;gap:6px;font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);background:var(--gold-dim);border:1px solid rgba(232,201,107,0.25);padding:3px 9px;border-radius:2rem;}
+.ai-project-desc{font-size:0.86rem;color:var(--muted);line-height:1.75;margin-bottom:1.4rem;}
+.ai-project-list{border-top:1px solid var(--border);padding-top:1.2rem;}
+.ai-project-list-label{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--indigo);margin-bottom:0.85rem;}
+.ai-project-list ul{list-style:none;display:grid;gap:0.55rem;}
+.ai-project-list li{font-size:0.8rem;color:var(--muted);line-height:1.5;display:flex;gap:0.6rem;align-items:flex-start;}
+.ai-project-list li::before{content:'✓';color:var(--indigo);font-weight:700;line-height:1.4;}
+.ai-bridge-note{margin-top:2rem;padding:1.25rem 1.5rem;border:1px solid var(--border-bright);border-radius:14px;background:linear-gradient(135deg,rgba(124,110,247,0.08),rgba(232,201,107,0.04));color:var(--muted);font-size:0.9rem;line-height:1.8;max-width:920px;position:relative;}
+.ai-bridge-note strong{color:var(--text);font-weight:600;}
+
+.ai-project-proof-line{color:var(--gold);font-size:0.9rem;font-weight:700;line-height:1.7;margin-top:1rem;max-width:860px;}
+.ai-arch-box{margin-top:1.5rem;margin-bottom:1.4rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:rgba(19,19,30,0.9);position:relative;overflow:hidden;}
+.ai-arch-box::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,110,247,0.08),transparent 65%);pointer-events:none;}
+.ai-arch-title{font-size:0.68rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:0.85rem;position:relative;}
+.ai-flow{display:flex;flex-direction:column;gap:0.45rem;position:relative;}
+.ai-flow-step{font-size:0.76rem;color:var(--muted);line-height:1.45;border:1px solid var(--border);background:var(--bg);border-radius:10px;padding:0.65rem 0.75rem;}
+.ai-flow-arrow{font-size:0.7rem;color:var(--indigo);padding-left:0.75rem;line-height:1;}
+.ai-project-actions{margin-top:1.5rem;display:flex;gap:0.75rem;flex-wrap:wrap;position:relative;}
+.ai-demo-btn{display:inline-flex;align-items:center;gap:7px;text-decoration:none;font-size:0.78rem;font-weight:700;border-radius:2rem;padding:0.65rem 1.05rem;transition:all 0.2s;}
+.ai-demo-primary{background:var(--indigo);color:#0d0d14;border:1px solid var(--indigo);}
+.ai-demo-primary:hover{box-shadow:0 0 24px rgba(124,110,247,0.35);transform:translateY(-1px);}
+.ai-demo-secondary{color:var(--text);border:1px solid var(--border-bright);background:transparent;}
+.ai-demo-secondary:hover{background:var(--indigo-glow);border-color:var(--indigo);transform:translateY(-1px);}
+
+@media(max-width:900px){#ai-projects{padding:5rem 1.5rem}.ai-project-grid{grid-template-columns:1fr}.ai-project-card{padding:2rem}}
+
 </style>
 </head>
 <body>
@@ -753,6 +792,7 @@ body::after {
 <div class="nav-wordmark">Sumaira <span>Nazir</span></div>
 <ul class="nav-links">
 <li><a href="#services">Services</a></li>
+<li><a href="#ai-projects">AI Projects</a></li>
 <li><a href="#credentials">Credentials</a></li>
 <li><a href="#collaboration">Collaboration</a></li><li><a href="#results">Results</a></li>
 <li><a href="#approach">Approach</a></li>
@@ -765,11 +805,11 @@ body::after {
 <div class="hero-glow2"></div>
 <div class="hero-inner">
 <div class="hero-content">
-<div class="hero-eyebrow"><div class="hero-dot"></div>Cloud FinOps &amp; Product Strategy Leader · Available for engagements</div>
-<h1 class="hero-headline">Turning cloud cost<br/>into <span class="hl">measurable</span> <span class="gold">business value.</span></h1>
-<p class="hero-sub">Multi-cloud FinOps leadership at the intersection of engineering, finance, and product. $2.7M+ in annualized impact delivered across AWS, GCP, and Azure. Among the first 50 FinOps Certified Professionals globally, and the <em style="font-style:italic;color:var(--gold);">first</em> practitioner to also hold CGEIT.</p>
+<div class="hero-eyebrow"><div class="hero-dot"></div>Cloud FinOps · AI Cost Governance · Product Strategy Leader</div>
+<h1 class="hero-headline">Turning cloud and <span class="hl">AI cost</span><br/>into <span class="hl">measurable</span> <span class="gold">business value.</span></h1>
+<p class="hero-sub">Multi-cloud FinOps and AI cost governance leader at the intersection of engineering, finance, and product. $2.7M+ in annualized impact delivered across AWS, GCP, and Azure, with hands-on experience building agentic AI systems for cost intelligence, governance, and automation.</p>
 <div class="hero-actions">
-<a class="btn-indigo" href="#contact">Discuss Your Cloud Cost Strategy →</a>
+<a class="btn-indigo" href="#contact">Discuss Cloud & AI Cost Strategy →</a>
 <a class="btn-outline" href="#results">View Results</a>
 </div>
 </div>
@@ -823,11 +863,111 @@ body::after {
 <span class="strip-tag">Anomaly Detection</span>
 <span class="strip-tag">Vendor Negotiations</span>
 <span class="strip-tag">Executive KPI Design</span>
+<span class="strip-tag">Agentic AI FinOps</span>
+<span class="strip-tag">LLM Cost Governance</span>
+<span class="strip-tag">Token-Based Cost Tracking</span>
+<span class="strip-tag">AI Agent Cost Control</span>
 </div>
 </div>
+<section id="ai-projects">
+  <div class="s-eyebrow">AI FinOps Projects</div>
+  <h2 class="s-title">Extending FinOps into agentic AI systems</h2>
+  <p class="ai-projects-intro">I am extending traditional FinOps into AI by building agentic systems that make LLM usage measurable, explainable, optimized, and financially governed.</p>
+  <p class="ai-project-proof-line">Transforming AI from experimental cost → governed, scalable product cost.</p>
+
+  <div class="ai-project-grid">
+    <div class="ai-project-card">
+      <div class="ai-project-top">
+        <div class="ai-project-icon">🤖</div>
+        <div>
+          <div class="ai-project-num">01</div>
+          <div class="ai-project-title">Multi-Agent AI FinOps System</div>
+          <span class="ai-project-badge">Ai For Finops (Claude)</span>
+        </div>
+      </div>
+      <p class="ai-project-desc">Built a multi-agent system using Claude to simulate how FinOps teams analyze, explain, and optimize AI and cloud costs. The system distributes responsibilities across specialized agents for cost analysis, anomaly detection, optimization, and reporting.</p>
+
+      <div class="ai-arch-box">
+        <div class="ai-arch-title">Architecture</div>
+        <div class="ai-flow">
+          <div class="ai-flow-step">User Request</div>
+          <div class="ai-flow-arrow">↓</div>
+          <div class="ai-flow-step">AI Agents in Claude</div>
+          <div class="ai-flow-arrow">↓</div>
+          <div class="ai-flow-step">Cost Analysis + Optimization + Explainability</div>
+          <div class="ai-flow-arrow">↓</div>
+          <div class="ai-flow-step">Token Tracking Layer</div>
+          <div class="ai-flow-arrow">↓</div>
+          <div class="ai-flow-step">BigQuery / dbt Models → Metabase Dashboard</div>
+        </div>
+      </div>
+
+      <div class="ai-project-list">
+        <div class="ai-project-list-label">Key capabilities</div>
+        <ul>
+          <li>Cost anomaly analysis</li>
+          <li>AI-generated optimization recommendations</li>
+          <li>Executive-ready FinOps summaries</li>
+          <li>Multi-cloud cost reasoning across AWS, GCP, and Azure</li>
+          <li>Agent-based workflow automation</li>
+        </ul>
+      </div>
+
+      <div class="ai-project-actions">
+        <a href="#" class="ai-demo-btn ai-demo-primary">View Demo →</a>
+        <a href="#" class="ai-demo-btn ai-demo-secondary">GitHub / Code</a>
+      </div>
+    </div>
+
+    <div class="ai-project-card">
+      <div class="ai-project-top">
+        <div class="ai-project-icon">💰</div>
+        <div>
+          <div class="ai-project-num">02</div>
+          <div class="ai-project-title">AI Agent Cost Control &amp; Governance</div>
+          <span class="ai-project-badge">FinOps for AI</span>
+        </div>
+      </div>
+      <p class="ai-project-desc">Designed a FinOps-driven cost control model for AI agents, enabling token usage tracking, cost per request, cost per feature, model routing, and governance controls for responsible AI adoption.</p>
+
+      <div class="ai-arch-box">
+        <div class="ai-arch-title">Architecture</div>
+        <div class="ai-flow">
+          <div class="ai-flow-step">API Request</div>
+          <div class="ai-flow-arrow">↓</div>
+          <div class="ai-flow-step">LLM / Agent Execution</div>
+          <div class="ai-flow-arrow">↓</div>
+          <div class="ai-flow-step">Input + Output Token Capture</div>
+          <div class="ai-flow-arrow">↓</div>
+          <div class="ai-flow-step">Cost Engine: Request, Feature, Agent</div>
+          <div class="ai-flow-arrow">↓</div>
+          <div class="ai-flow-step">Budget Guardrails + Anomaly Alerts + Showback</div>
+        </div>
+      </div>
+
+      <div class="ai-project-list">
+        <div class="ai-project-list-label">Key capabilities</div>
+        <ul>
+          <li>Token-level cost tracking</li>
+          <li>Cost per request and feature</li>
+          <li>Model routing based on cost vs complexity</li>
+          <li>Runaway usage detection</li>
+          <li>Budget guardrails and AI showback</li>
+        </ul>
+      </div>
+
+      <div class="ai-project-actions">
+        <a href="#" class="ai-demo-btn ai-demo-primary">View Demo →</a>
+        <a href="#" class="ai-demo-btn ai-demo-secondary">GitHub / Code</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ai-bridge-note"><strong>My AI FinOps lens:</strong> tagging becomes prompt metadata, right-sizing becomes model routing, anomaly detection becomes token-spike alerting, and showback becomes API key or agent-level cost accountability.</div>
+</section>
 <section id="services">
 <div class="s-eyebrow">What I Do</div>
-<h2 class="s-title">Where cloud economics becomes business advantage</h2>
+<h2 class="s-title">Where cloud and AI economics become business advantage</h2>
 <div class="services-grid">
 <div class="svc"><span class="svc-num">01</span><div class="svc-icon-svg"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg></div><div class="svc-name">Multi-Cloud Cost Strategy &amp; Commitments</div><div class="svc-desc">Executive-level strategy across AWS, GCP, Azure, OVH, and IBM. Focused on commitment planning, vendor trade-offs, pricing leverage, and spend predictability at scale.</div></div>
 <div class="svc"><span class="svc-num">02</span><div class="svc-icon-svg"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><line x1="18" x2="18" y1="20" y2="10"></line><line x1="12" x2="12" y1="20" y2="4"></line><line x1="6" x2="6" y1="20" y2="14"></line><line x1="2" x2="22" y1="20" y2="20"></line></svg></div><div class="svc-name">COGS, Unit Economics &amp; Cost Modeling</div><div class="svc-desc">FOCUS-aligned allocation models that connect cloud spend to products, customers, features, and margins. Built with data teams using dbt, BigQuery, and executive-ready KPIs.</div></div>
@@ -847,7 +987,7 @@ body::after {
 <h2 class="s-title">The depth to advise, the credentials to back it up</h2>
 </div>
 <div class="cred-right-text">
-<p style="color:var(--muted);font-size:0.95rem;line-height:1.8;">Nine active certifications spanning the full spectrum of cloud financial strategy, governance, and AI. Among the first 50 FinOps Certified Professionals globally — and uniquely, the <strong style="color:var(--text);font-weight:600;">first FinOps professional worldwide</strong> to also hold CGEIT from ISACA, meaning I can bridge cloud economics with enterprise governance in ways most practitioners can't.</p>
+<p style="color:var(--muted);font-size:0.95rem;line-height:1.8;">Nine active certifications spanning the full spectrum of cloud financial strategy, governance, and AI. Among the first 50 FinOps Certified Professionals globally — and uniquely, the <strong style="color:var(--text);font-weight:600;">first and only FinOps professional worldwide</strong> to also hold CGEIT from ISACA, meaning I can bridge cloud economics with enterprise governance in ways most practitioners can't.</p>
 <div class="cloud-bars" style="margin-top:2rem;">
 <div class="cloud-bar"><div class="cloud-bar-header"><span class="cloud-bar-name">AWS</span><span class="cloud-bar-val">Primary</span></div><div class="cloud-bar-track"><div class="cloud-bar-fill" style="width:92%"></div></div></div>
 <div class="cloud-bar"><div class="cloud-bar-header"><span class="cloud-bar-name">Google Cloud</span><span class="cloud-bar-val">Advanced</span></div><div class="cloud-bar-track"><div class="cloud-bar-fill" style="width:80%"></div></div></div>
@@ -859,7 +999,7 @@ body::after {
 <div style="margin-bottom:3rem;padding:1.5rem 2rem;background:linear-gradient(135deg,rgba(124,110,247,0.08),rgba(232,201,107,0.06));border:1px solid rgba(232,201,107,0.25);border-radius:16px;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;">
 <div style="flex:1;min-width:260px;">
 <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">A Unique Combination — Worldwide</div>
-<div style="font-family:'Playfair Display',serif;font-size:1.3rem;line-height:1.3;color:var(--text);">The first FinOps Certified Professional<br/>to also hold <em>CGEIT</em> — bridging cloud economics with enterprise IT governance.</div>
+<div style="font-family:'Playfair Display',serif;font-size:1.3rem;line-height:1.3;color:var(--text);">The first and only FinOps Certified Professional<br/>to also hold <em>CGEIT</em> — bridging cloud economics with enterprise IT governance.</div>
 </div>
 <div style="display:flex;gap:1.5rem;align-items:center;">
 <div style="text-align:center;">
@@ -888,7 +1028,7 @@ body::after {
 </div>
 <div onmouseout="this.style.transform='translateY(0)'" onmouseover="this.style.transform='translateY(-4px)'" style="width:120px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:default;transition:transform 0.2s;">
 <img alt="CGEIT — IT Governance" src="https://images.credly.com/images/fae5b907-04c2-4013-abbd-b469dd337bb8/58378d269383d34bde29a49abfd59e643a0f12a8.png" style="width:100px;height:100px;object-fit:contain;border-radius:10px;background:#fff;padding:5px;filter:drop-shadow(0 0 10px rgba(124,110,247,0.4));"/>
-<span style="font-size:0.68rem;font-weight:600;color:var(--muted);text-align:center;line-height:1.3;max-width:110px;color:var(--indigo);">CGEIT — IT Governance<span style="font-size:0.6rem;color:var(--gold);display:block;margin-top:2px;display:flex;align-items:center;gap:5px;"><img alt="FinOps Foundation" src="https://i.ibb.co/gLv92GPw/image.png" style="height:10px;width:auto;filter:brightness(0) invert(1);opacity:0.5;"/>First FinOps + CGEIT</span></span>
+<span style="font-size:0.68rem;font-weight:600;color:var(--muted);text-align:center;line-height:1.3;max-width:110px;color:var(--indigo);">CGEIT — IT Governance<span style="font-size:0.6rem;color:var(--gold);display:block;margin-top:2px;display:flex;align-items:center;gap:5px;"><img alt="FinOps Foundation" src="https://i.ibb.co/gLv92GPw/image.png" style="height:10px;width:auto;filter:brightness(0) invert(1);opacity:0.5;"/>First &amp; only FinOps + CGEIT</span></span>
 </div>
 <div onmouseout="this.style.transform='translateY(0)'" onmouseover="this.style.transform='translateY(-4px)'" style="width:120px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:default;transition:transform 0.2s;">
 <img alt="PMP — Project Management" src="https://images.credly.com/images/731e7ef4-9b0c-4d7b-ab65-23cc699c0aa3/blob" style="width:100px;height:100px;object-fit:contain;border-radius:10px;background:#fff;padding:5px;"/>
