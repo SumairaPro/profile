@@ -869,6 +869,121 @@ body::after {
 <span class="strip-tag">AI Agent Cost Control</span>
 </div>
 </div>
+<section id="finops-ai-framework" style="padding:7rem 3.5rem;background:var(--bg2);border-top:1px solid var(--border);position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-200px;left:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(124,110,247,0.07) 0%,transparent 70%);pointer-events:none;"></div>
+
+  <div class="s-eyebrow">FinOps Framework for AI Products</div>
+  <h2 class="s-title">Mapping the AI product lifecycle to the FinOps capabilities that govern it</h2>
+  <p class="ai-projects-intro">
+    I built a framework that maps <strong style="color:var(--text);font-weight:600;">every stage of the AI product lifecycle</strong>
+    to the FinOps Capabilities that should govern it — so cost ownership, visibility, and guardrails are designed in
+    from the first stage, not retrofitted after the bill arrives.
+  </p>
+
+  <!-- Horizontal lifecycle flow -->
+  <div class="lc-scroll" style="margin-top:3rem;overflow-x:auto;padding-bottom:0.5rem;">
+    <div class="lc-track" style="display:flex;align-items:stretch;gap:0.5rem;min-width:max-content;">
+
+      <!-- 1 -->
+      <div class="lc-card" style="flex:1;min-width:150px;background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1rem;display:flex;flex-direction:column;">
+        <div style="font-family:'Playfair Display',serif;font-size:0.78rem;color:var(--indigo);opacity:0.5;font-style:italic;margin-bottom:0.5rem;">01</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);font-weight:700;line-height:1.2;">Learn</div>
+        <div style="font-size:0.74rem;color:var(--muted);margin-top:3px;line-height:1.4;flex:1;">Token = billing unit</div>
+        <div style="margin-top:0.85rem;padding-top:0.7rem;border-top:1px solid var(--border);font-size:0.64rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--indigo);line-height:1.3;">Data ingestion</div>
+      </div>
+      <div class="lc-arrow" style="display:flex;align-items:center;color:var(--indigo);font-size:1rem;">→</div>
+
+      <!-- 2 (highlight) -->
+      <div class="lc-card" style="flex:1;min-width:150px;background:var(--gold-dim);border:1px solid rgba(232,201,107,0.35);border-radius:14px;padding:1.1rem 1rem;display:flex;flex-direction:column;">
+        <div style="font-family:'Playfair Display',serif;font-size:0.78rem;color:var(--gold);opacity:0.7;font-style:italic;margin-bottom:0.5rem;">02</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);font-weight:700;line-height:1.2;">Design</div>
+        <div style="font-size:0.74rem;color:var(--muted);margin-top:3px;line-height:1.4;flex:1;">60–80% of cost set here</div>
+        <div style="margin-top:0.85rem;padding-top:0.7rem;border-top:1px solid rgba(232,201,107,0.25);font-size:0.64rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--gold);line-height:1.3;">Architecting for cost</div>
+      </div>
+      <div class="lc-arrow" style="display:flex;align-items:center;color:var(--indigo);font-size:1rem;">→</div>
+
+      <!-- 3 -->
+      <div class="lc-card" style="flex:1;min-width:150px;background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1rem;display:flex;flex-direction:column;">
+        <div style="font-family:'Playfair Display',serif;font-size:0.78rem;color:var(--indigo);opacity:0.5;font-style:italic;margin-bottom:0.5rem;">03</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);font-weight:700;line-height:1.2;">Build</div>
+        <div style="font-size:0.74rem;color:var(--muted);margin-top:3px;line-height:1.4;flex:1;">Agents are cost multipliers</div>
+        <div style="margin-top:0.85rem;padding-top:0.7rem;border-top:1px solid var(--border);font-size:0.64rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--indigo);line-height:1.3;">Anomaly + allocation</div>
+      </div>
+      <div class="lc-arrow" style="display:flex;align-items:center;color:var(--indigo);font-size:1rem;">→</div>
+
+      <!-- 4 (highlight) -->
+      <div class="lc-card" style="flex:1;min-width:150px;background:var(--gold-dim);border:1px solid rgba(232,201,107,0.35);border-radius:14px;padding:1.1rem 1rem;display:flex;flex-direction:column;">
+        <div style="font-family:'Playfair Display',serif;font-size:0.78rem;color:var(--gold);opacity:0.7;font-style:italic;margin-bottom:0.5rem;">04</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);font-weight:700;line-height:1.2;">Validate</div>
+        <div style="font-size:0.74rem;color:var(--muted);margin-top:3px;line-height:1.4;flex:1;">Add cost as 6th axis</div>
+        <div style="margin-top:0.85rem;padding-top:0.7rem;border-top:1px solid rgba(232,201,107,0.25);font-size:0.64rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--gold);line-height:1.3;">Forecasting + unit econ</div>
+      </div>
+      <div class="lc-arrow" style="display:flex;align-items:center;color:var(--indigo);font-size:1rem;">→</div>
+
+      <!-- 5 -->
+      <div class="lc-card" style="flex:1;min-width:150px;background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1rem;display:flex;flex-direction:column;">
+        <div style="font-family:'Playfair Display',serif;font-size:0.78rem;color:var(--indigo);opacity:0.5;font-style:italic;margin-bottom:0.5rem;">05</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);font-weight:700;line-height:1.2;">Evaluate</div>
+        <div style="font-size:0.74rem;color:var(--muted);margin-top:3px;line-height:1.4;flex:1;">Quality and cost intersect</div>
+        <div style="margin-top:0.85rem;padding-top:0.7rem;border-top:1px solid var(--border);font-size:0.64rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--indigo);line-height:1.3;">Cost-per-quality-point</div>
+      </div>
+      <div class="lc-arrow" style="display:flex;align-items:center;color:var(--indigo);font-size:1rem;">→</div>
+
+      <!-- 6 -->
+      <div class="lc-card" style="flex:1;min-width:150px;background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1rem;display:flex;flex-direction:column;">
+        <div style="font-family:'Playfair Display',serif;font-size:0.78rem;color:var(--indigo);opacity:0.5;font-style:italic;margin-bottom:0.5rem;">06</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);font-weight:700;line-height:1.2;">Deploy</div>
+        <div style="font-size:0.74rem;color:var(--muted);margin-top:3px;line-height:1.4;flex:1;">Baseline before budgets</div>
+        <div style="margin-top:0.85rem;padding-top:0.7rem;border-top:1px solid var(--border);font-size:0.64rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--indigo);line-height:1.3;">Inform → Operate cycle</div>
+      </div>
+      <div class="lc-arrow" style="display:flex;align-items:center;color:var(--indigo);font-size:1rem;">→</div>
+
+      <!-- 7 -->
+      <div class="lc-card" style="flex:1;min-width:150px;background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1rem;display:flex;flex-direction:column;">
+        <div style="font-family:'Playfair Display',serif;font-size:0.78rem;color:var(--indigo);opacity:0.5;font-style:italic;margin-bottom:0.5rem;">07</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);font-weight:700;line-height:1.2;">Observe</div>
+        <div style="font-size:0.74rem;color:var(--muted);margin-top:3px;line-height:1.4;flex:1;">Governance is a team sport</div>
+        <div style="margin-top:0.85rem;padding-top:0.7rem;border-top:1px solid var(--border);font-size:0.64rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--indigo);line-height:1.3;">Policy &amp; governance</div>
+      </div>
+      <div class="lc-arrow" style="display:flex;align-items:center;color:var(--indigo);font-size:1rem;">→</div>
+
+      <!-- 8 -->
+      <div class="lc-card" style="flex:1;min-width:150px;background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1rem;display:flex;flex-direction:column;">
+        <div style="font-family:'Playfair Display',serif;font-size:0.78rem;color:var(--indigo);opacity:0.5;font-style:italic;margin-bottom:0.5rem;">08</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);font-weight:700;line-height:1.2;">Optimize</div>
+        <div style="font-size:0.74rem;color:var(--muted);margin-top:3px;line-height:1.4;flex:1;">Rate + usage levers</div>
+        <div style="margin-top:0.85rem;padding-top:0.7rem;border-top:1px solid var(--border);font-size:0.64rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--indigo);line-height:1.3;">Rate optimization</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Continuous improvement loop -->
+  <div style="margin-top:1rem;display:flex;align-items:center;gap:0.75rem;color:var(--indigo);">
+    <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border-bright),var(--border));"></span>
+    <span style="font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;">↺ Continuous improvement — Optimize feeds back into Learn</span>
+    <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),var(--border-bright));"></span>
+  </div>
+
+  <div class="ai-project-actions" style="margin-top:2.25rem;">
+    <a class="ai-demo-btn ai-demo-primary" href="https://sumairapro.github.io/profile/finops_ai_product_lifecycle.html" target="_blank" rel="noopener">
+      View the full framework →
+    </a>
+  </div>
+</section>
+
+
+  <div class="ai-project-actions" style="margin-top:2.25rem;">
+    <a class="ai-demo-btn ai-demo-primary" href="https://sumairapro.github.io/profile/finops_ai_product_lifecycle.html" target="_blank" rel="noopener">
+      View the full framework →
+    </a>
+  </div>
+</section>  <div class="ai-project-actions" style="margin-top:2.25rem;">
+    <a class="ai-demo-btn ai-demo-primary" href="https://sumairapro.github.io/profile/finops_ai_product_lifecycle.html" target="_blank" rel="noopener">
+      View the full framework →
+    </a>
+  </div>
+</section>
 <section id="ai-projects">
   <div class="s-eyebrow">AI FinOps Projects</div>
   <h2 class="s-title">Extending FinOps into agentic AI systems</h2>
