@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FinOps Thinking for AI Product Development</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a2e;
+    --accent: #6c3fc5;
+    --accent-light: #e8dff7;
+    --gold: #f5a623;
+    --gold-light: #fef3dc;
+    --cream: #fdfaf5;
+    --border: #d0c4eb;
+    --border-gold: #e8c97a;
+    --text: #2d2d2d;
+    --muted: #555;
+    --green: #0f6e56;
+    --green-light: #e1f5ee;
+    --red: #a32d2d;
+    --red-light: #fcebeb;
+    --blue: #185fa5;
+    --blue-light: #e6f1fb;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    padding: 32px;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid var(--accent);
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    padding: 3px 14px;
+    margin-bottom: 8px;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 46px;
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1.05;
+    margin-bottom: 6px;
+  }
+
+  header .subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .card {
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    page-break-inside: avoid;
+  }
+
+  .card.full { grid-column: 1 / -1; }
+
+  .card.gold-accent {
+    border-color: var(--border-gold);
+    background: #fffdf7;
+  }
+
+  .step-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px 3px 5px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+  }
+
+  .step-badge .num {
+    background: rgba(255,255,255,0.22);
+    border-radius: 3px;
+    padding: 1px 6px;
+    font-size: 11px;
+  }
+
+  .step-badge .note {
+    font-size: 9px;
+    opacity: 0.82;
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+
+  .step-badge.gold-badge {
+    background: var(--gold);
+    color: #412402;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 5px;
+  }
+
+  .tagline {
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-bottom: 9px;
+    font-style: italic;
+    line-height: 1.45;
+  }
+
+  ul { list-style: none; padding: 0; }
+
+  ul li {
+    font-size: 12px;
+    padding: 3px 0 3px 16px;
+    position: relative;
+    line-height: 1.5;
+    color: var(--text);
+  }
+
+  ul li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 10px;
+    top: 4px;
+  }
+
+  ul li strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  ul li.risk::before { content: '⚠'; color: var(--red); }
+  ul li.savings::before { content: '$'; color: var(--green); font-weight: 700; }
+  ul li.action::before { content: '→'; color: var(--blue); font-weight: 700; }
+
+  .levers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .lever {
+    background: var(--accent-light);
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+
+  .lever .lever-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+
+  .lever p {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+
+  .lever.gold-lever {
+    background: var(--gold-light);
+  }
+
+  .lever.gold-lever .lever-title { color: #854f0b; }
+
+  .lever.green-lever {
+    background: var(--green-light);
+  }
+
+  .lever.green-lever .lever-title { color: var(--green); }
+
+  .lever.red-lever {
+    background: var(--red-light);
+  }
+
+  .lever.red-lever .lever-title { color: var(--red); }
+
+  .lever.blue-lever {
+    background: var(--blue-light);
+  }
+
+  .lever.blue-lever .lever-title { color: var(--blue); }
+
+  .tiers {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .tier {
+    border-radius: 6px;
+    padding: 10px 12px;
+    border: 1px solid;
+  }
+
+  .tier-1 { background: var(--green-light); border-color: #9fe1cb; }
+  .tier-2 { background: var(--blue-light); border-color: #b5d4f4; }
+  .tier-3 { background: var(--red-light); border-color: #f7c1c1; }
+
+  .tier .tier-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 3px;
+  }
+
+  .tier-1 .tier-label { color: var(--green); }
+  .tier-2 .tier-label { color: var(--blue); }
+  .tier-3 .tier-label { color: var(--red); }
+
+  .tier .tier-name { font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+  .tier .tier-use { font-size: 11px; color: var(--muted); line-height: 1.4; }
+  .tier .tier-price { font-size: 10px; font-weight: 700; margin-top: 5px; }
+  .tier-1 .tier-price { color: var(--green); }
+  .tier-2 .tier-price { color: var(--blue); }
+  .tier-3 .tier-price { color: var(--red); }
+
+  .weeks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .week {
+    background: var(--accent-light);
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+
+  .week h3 {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 5px;
+  }
+
+  .metrics-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .metric {
+    background: var(--accent-light);
+    border-radius: 6px;
+    padding: 8px 10px;
+    text-align: center;
+  }
+
+  .metric .metric-val {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .metric .metric-label {
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+
+  .principles {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .principle {
+    border-radius: 6px;
+    padding: 9px 11px;
+    border: 1px solid var(--border);
+  }
+
+  .principle .p-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .principle .p-body {
+    font-size: 10.5px;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    margin-top: 5px;
+  }
+
+  .tag-savings { background: var(--green-light); color: var(--green); }
+  .tag-risk { background: var(--red-light); color: var(--red); }
+  .tag-action { background: var(--blue-light); color: var(--blue); }
+  .tag-key { background: var(--gold-light); color: #854f0b; }
+
+  .finops-cap {
+    margin-top: 9px;
+    padding-top: 7px;
+    border-top: 1px dashed var(--border);
+    font-size: 10.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .finops-cap .cap-label {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-right: 6px;
+  }
+
+  .finops-cap strong { color: var(--ink); font-weight: 600; }
+
+  .map-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 11px;
+  }
+
+  .map-table th {
+    text-align: left;
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-bottom: 2px solid var(--border);
+    padding: 6px 8px;
+  }
+
+  .map-table td {
+    border-bottom: 1px solid var(--border);
+    padding: 7px 8px;
+    vertical-align: top;
+    line-height: 1.45;
+    color: var(--text);
+  }
+
+  .map-table td.step { font-weight: 700; color: var(--ink); white-space: nowrap; }
+  .map-table td.dom { color: var(--muted); white-space: nowrap; }
+  .map-table td.cap strong { color: var(--accent); font-weight: 700; }
+  .map-table tr:last-child td { border-bottom: none; }
+
+  footer {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 10.5px;
+    color: #aaa;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+
+  .footer-author {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .footer-creds {
+    font-size: 10.5px;
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    margin-bottom: 10px;
+  }
+
+  .footer-disclaimer {
+    max-width: 780px;
+    margin: 10px auto 0;
+    padding: 10px 14px;
+    background: var(--accent-light);
+    border-radius: 6px;
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.55;
+    text-align: left;
+  }
+
+  .footer-disclaimer strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .footer-print {
+    margin-top: 12px;
+    font-size: 10px;
+    color: #bbb;
+  }
+
+  @media print {
+    body { padding: 16px; background: white; }
+    .grid { gap: 10px; }
+    header h1 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">FinOps for AI</div>
+  <h1>FinOps Thinking for AI Products</h1>
+  <p class="subtitle">Cost controls mapped to every phase of the AI product lifecycle — and to the FinOps Framework 2025 Capabilities behind them</p>
+</header>
+
+<div class="grid">
+
+  <!-- Step 1 -->
+  <div class="card">
+    <div class="step-badge"><span class="num">1</span> LLM Basics</div>
+    <h2>Token = billing unit</h2>
+    <p class="tagline">Understand the cost model before you write a line of code.</p>
+    <ul>
+      <li class="savings"><strong>Size inputs early.</strong> Estimate avg input/output tokens × volume × price/MTok before choosing a model.</li>
+      <li class="action"><strong>Model tiering policy.</strong> Cheap models for routing/classification; frontier models only for synthesis or judgment.</li>
+      <li class="savings"><strong>Cache stable prompts.</strong> Prompt caching deflects 50–90% of input cost on repeated system prompts.</li>
+      <li class="action"><strong>Instrument from day 1.</strong> Log prompt_tokens, completion_tokens, model_id, feature_name, latency_ms on every call.</li>
+    </ul>
+    <span class="tag tag-key">Token is the billing unit — always</span>
+    <div class="finops-cap"><span class="cap-label">FinOps Capability</span> <strong>Data Ingestion</strong> (Understand Usage &amp; Cost) — token telemetry is your billing feed, the AI-Scope equivalent of a FOCUS / CUR export.</div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="card">
+    <div class="step-badge"><span class="num">2</span> Context Design <span class="note">Most Important</span></div>
+    <h2>60–80% of cost decided here</h2>
+    <p class="tagline">Prompt engineering and RAG architecture are FinOps decisions.</p>
+    <ul>
+      <li class="savings"><strong>Prompt compression.</strong> A 2,000-token system prompt sent 500K times/day = $1,500/day at $1.50/MTok. Audit and trim regularly.</li>
+      <li class="action"><strong>RAG chunk strategy.</strong> Set max_chunks limits and similarity thresholds. Over-retrieval is a hidden cost driver.</li>
+      <li class="risk"><strong>Fine-tune break-even gate.</strong> Model the break-even: training cost ÷ daily prompt savings before committing.</li>
+      <li class="savings"><strong>Tag cacheable vs dynamic content</strong> explicitly in architecture. Cache hit rate = direct cost avoidance signal.</li>
+    </ul>
+    <span class="tag tag-savings">Prompt caching = highest ROI lever</span>
+    <div class="finops-cap"><span class="cap-label">FinOps Capability</span> <strong>Architecting for Cost</strong> (Optimize Usage &amp; Cost) — prompt and RAG design is right-sizing before deploy, the highest-leverage usage-optimization decision in the lifecycle.</div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="card">
+    <div class="step-badge"><span class="num">3</span> Build Agents <span class="note">When AI Must Act</span></div>
+    <h2>Agents are cost multipliers</h2>
+    <p class="tagline">Every tool call, memory retrieval, and guardrail check adds token spend.</p>
+    <div class="levers-grid">
+      <div class="lever red-lever">
+        <div class="lever-title">Loop guardrails</div>
+        <p>Set max_iterations, max_tokens_per_run, and budget_cap circuit breakers before deploying any agent. Unbounded loops = #1 billing shock.</p>
+        <span class="tag tag-risk">Non-negotiable</span>
+      </div>
+      <div class="lever blue-lever">
+        <div class="lever-title">Tool cost attribution</div>
+        <p>Each tool call = LLM inference + external API cost. Log tool call frequency by type. High-frequency tools dominate costs.</p>
+        <span class="tag tag-action">Track per tool type</span>
+      </div>
+      <div class="lever green-lever">
+        <div class="lever-title">Memory optimization</div>
+        <p>Full history grows linearly. Implement summarization, sliding windows, or vector store retrieval to cap context size.</p>
+        <span class="tag tag-savings">Cap context growth</span>
+      </div>
+      <div class="lever">
+        <div class="lever-title">Guardrail analytics</div>
+        <p>High guardrail hit rate signals upstream prompt or UX issues that are costing you money. Fix at source, not at guard.</p>
+        <span class="tag tag-action">Track hit rate</span>
+      </div>
+    </div>
+    <div class="finops-cap"><span class="cap-label">FinOps Capability</span> <strong>Anomaly Management + Allocation</strong> (Understand Usage &amp; Cost) — loop circuit breakers are anomaly control; per-tool and per-agent logging is the allocation key that makes agent spend attributable.</div>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="card gold-accent">
+    <div class="step-badge gold-badge"><span class="num">4</span> 5-D Validation + Cost Viability</div>
+    <h2>Add a 6th axis: cost viability</h2>
+    <p class="tagline">Standard AI validation covers five dimensions — <strong>accuracy, relevance, safety, grounding, and latency</strong>. This step adds a sixth: can the feature's unit economics survive at scale? Validate the business case before a single dollar is spent on infrastructure.</p>
+    <ul>
+      <li class="action"><strong>Cost viability gate.</strong> Estimate cost-per-query × expected volume = projected monthly spend. Kill projects that can't pencil out at scale.</li>
+      <li class="action"><strong>Value attribution.</strong> A feature with $0.05/use AI cost must generate &gt;$0.05 in measurable value (retention, time saved, conversion).</li>
+      <li class="risk"><strong>Scale cost modeling.</strong> Stress-test at 10× and 100× load. Many AI architectures are cheap at 1K users, ruinous at 1M.</li>
+    </ul>
+    <div class="metrics-row">
+      <div class="metric"><span class="metric-val">$cost/query</span><span class="metric-label">× daily volume</span></div>
+      <div class="metric"><span class="metric-val">× 30 days</span><span class="metric-label">= monthly forecast</span></div>
+      <div class="metric"><span class="metric-val">vs. ARR</span><span class="metric-label">impact per user</span></div>
+      <div class="metric"><span class="metric-val">10× test</span><span class="metric-label">scale cost check</span></div>
+    </div>
+    <div class="finops-cap"><span class="cap-label">FinOps Capability</span> <strong>Forecasting + Unit Economics</strong> (Quantify Business Value) — cost-per-query × volume is forecasting run pre-build, and the value-per-use gate is unit economics applied before a dollar of infra is spent.</div>
+  </div>
+
+  <!-- Step 5 -->
+  <div class="card full">
+    <div class="step-badge"><span class="num">5</span> Build Evaluations <span class="note">Non-Negotiable</span></div>
+    <h2>Quality and cost intersect here</h2>
+    <p class="tagline">Every eval run has a cost. But skipping evals is more expensive — hallucinations and silent drift cost more at scale.</p>
+    <div class="levers-grid">
+      <div class="lever">
+        <div class="lever-title">Eval sampling strategy</div>
+        <p>Running a judge on every production response can 2–3× your inference costs. Evaluate 5–10% of traffic, stratified by query type and confidence score — not 100%.</p>
+        <span class="tag tag-action">Sample, don't evaluate all</span>
+      </div>
+      <div class="lever blue-lever">
+        <div class="lever-title">Hallucination rate as cost metric</div>
+        <p>Hallucinations drive user re-queries, support tickets, and trust erosion — all with measurable cost. Track hallucination rate alongside COGS. Treat quality regression as a cost event.</p>
+        <span class="tag tag-action">Wire to FinOps dashboard</span>
+      </div>
+      <div class="lever red-lever">
+        <div class="lever-title">Drift alerts = cost anomaly detectors</div>
+        <p>Model drift manifests as increased token usage (longer hedged responses), lower completion rates, or eval score decline. Wire drift alerts to your anomaly detection stack.</p>
+        <span class="tag tag-risk">Drift = cost event</span>
+      </div>
+      <div class="lever green-lever">
+        <div class="lever-title">Cost-per-quality-point ratio</div>
+        <p>As eval scores improve, track whether cost is rising proportionally. Goal: quality improvement at flat or declining cost. This ratio is your AI product efficiency metric.</p>
+        <span class="tag tag-savings">Your AI efficiency KPI</span>
+      </div>
+    </div>
+    <div class="finops-cap"><span class="cap-label">FinOps Capability</span> <strong>Anomaly Management + Unit Economics</strong> — drift wired to anomaly detection is a cost-event detector; cost-per-quality-point is the unit-economics metric that links quality regression to spend.</div>
+  </div>
+
+  <!-- Step 6 -->
+  <div class="card full">
+    <div class="step-badge"><span class="num">6</span> Execute a 30-Day Plan</div>
+    <h2>FinOps posture by week</h2>
+    <p class="tagline">Each week has a distinct cost control stance — from unconstrained learning to disciplined optimization.</p>
+    <div class="weeks">
+      <div class="week">
+        <h3>Week 1 — Set cost baseline, not budgets</h3>
+        <ul>
+          <li class="action">Log token counts, latency, and retrieval depth per query from day 1.</li>
+          <li class="savings">Don't cap spend yet — instrument and observe. Data shapes all future optimization.</li>
+          <li class="action">Identify your p50 / p90 / p99 token distribution across query types.</li>
+        </ul>
+      </div>
+      <div class="week">
+        <h3>Week 2 — Cost-profile your agent design</h3>
+        <ul>
+          <li class="action">Run 100 synthetic queries and measure token spend distribution.</li>
+          <li class="savings">Identify the 10% of queries consuming 50% of cost — the Pareto of your AI spend.</li>
+          <li class="risk">Stress-test agent loops for runaway behavior before any live traffic.</li>
+        </ul>
+      </div>
+      <div class="week">
+        <h3>Week 3 — Real traffic = real cost signal</h3>
+        <ul>
+          <li class="action">Compare real cost-per-user against your Week 1 estimate.</li>
+          <li class="risk">A 2× gap is a FinOps alert. Identify query patterns driving excess spend.</li>
+          <li class="savings">First cache hit rate data becomes visible — start tracking deflection.</li>
+        </ul>
+      </div>
+      <div class="week">
+        <h3>Week 4 — Optimize, then set budgets</h3>
+        <ul>
+          <li class="savings">Only after understanding cost distribution should you set budget alerts and caps.</li>
+          <li class="action">Prioritize: prompt compression, caching, model downtiering — in that order.</li>
+          <li class="action">Set anomaly thresholds at 150% of forecast spend as your first governance gate.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="finops-cap"><span class="cap-label">FinOps Phases</span> <strong>Inform → Optimize → Operate</strong> — this week-by-week cadence is the FinOps maturity arc: baseline first (Inform), optimize second, then govern with budgets and gates (Operate). Caps before understanding is the classic anti-pattern.</div>
+  </div>
+
+  <!-- Step 7 -->
+  <div class="card full">
+    <div class="step-badge"><span class="num">7</span> Team &amp; Ethics</div>
+    <h2>Cost governance is a team sport — and an ethical obligation</h2>
+    <p class="tagline">Unmonitored AI spend has environmental impact, equity implications, and governance risk.</p>
+    <div class="principles">
+      <div class="principle">
+        <div class="p-title">Shift-left cost culture</div>
+        <div class="p-body">Cost accountability belongs in the team building the product, not a central FinOps function reviewing bills after the fact. Assign cost ownership per agent, feature, and model tier from day 1.</div>
+        <span class="tag tag-action">Embed FinOps in eng teams</span>
+      </div>
+      <div class="principle">
+        <div class="p-title">Human approval gates</div>
+        <div class="p-body">High-cost agent actions — multi-step workflows, large context retrievals — need human approval gates during early rollout. Limits runaway spend and catches design errors before they scale.</div>
+        <span class="tag tag-risk">Gate expensive actions</span>
+      </div>
+      <div class="principle">
+        <div class="p-title">Carbon FinOps</div>
+        <div class="p-body">AI inference has measurable carbon footprint. Larger models, longer contexts, and unnecessary retries increase carbon spend. Track token efficiency as a sustainability metric alongside cost.</div>
+        <span class="tag tag-savings">Token efficiency = green KPI</span>
+      </div>
+      <div class="principle">
+        <div class="p-title">Misuse cost detection</div>
+        <div class="p-body">Misuse patterns — prompt injection, abuse, scraping via your API — drive anomalous cost spikes. Wire anomaly detection to flag usage patterns inconsistent with legitimate user behavior.</div>
+        <span class="tag tag-risk">Anomaly = misuse signal</span>
+      </div>
+      <div class="principle">
+        <div class="p-title">Weekly unit economics review</div>
+        <div class="p-body">Cost per active user, cost per query by feature, token distribution p50/p90/p99, cache hit rate, model tier mix. This is your AI FinOps operating cadence — 30 min/week, highest ROI habit.</div>
+        <span class="tag tag-action">Standing weekly review</span>
+      </div>
+      <div class="principle">
+        <div class="p-title">Model tiering governance</div>
+        <div class="p-body">Never allow a frontier model as the unchallenged default. Require an explicit routing justification for any Tier 3 usage. A rules-based router can cut model spend substantially — on the order of 60–80% in router-friendly traffic mixes, less when most queries genuinely need frontier reasoning.</div>
+        <span class="tag tag-savings">Router beats default model</span>
+      </div>
+    </div>
+    <div class="finops-cap"><span class="cap-label">FinOps Capability</span> <strong>Education &amp; Enablement · Policy &amp; Governance · Sustainability</strong> (Manage the FinOps Practice) — shift-left ownership is enablement plus chargeback; approval gates and tier policy are governance; carbon-per-token is the sustainability capability applied to AI.</div>
+  </div>
+
+  <!-- FinOps Framework Mapping -->
+  <div class="card full">
+    <div class="step-badge gold-badge">Reference — FinOps Framework Mapping</div>
+    <h2>Every step is an established FinOps Capability — applied to the AI Scope</h2>
+    <p class="tagline">Framework 2025 removed "cloud" from the Domains and added <strong>Scopes</strong>, making AI a first-class Scope of FinOps. This lifecycle isn't a new discipline — it's the existing Capabilities translated to tokens. In the 2025 State of FinOps, practitioners reported approaching AI through Understand &amp; Quantify Capabilities first (Allocation, Data Ingestion, Anomaly Detection, Forecasting) before optimization — which is exactly why this framework baselines before it budgets.</p>
+    <table class="map-table">
+      <thead>
+        <tr><th>Lifecycle step</th><th>FinOps Domain</th><th>Capability → AI translation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="step">1 · LLM Basics</td><td class="dom">Understand Usage &amp; Cost</td><td class="cap"><strong>Data Ingestion</strong> — token telemetry is your billing feed</td></tr>
+        <tr><td class="step">2 · Context Design</td><td class="dom">Optimize Usage &amp; Cost</td><td class="cap"><strong>Architecting for Cost</strong> — prompt/RAG design is right-sizing before deploy</td></tr>
+        <tr><td class="step">3 · Build Agents</td><td class="dom">Understand Usage &amp; Cost</td><td class="cap"><strong>Anomaly Management + Allocation</strong> — loop breakers; per-tool attribution</td></tr>
+        <tr><td class="step">4 · Cost Viability</td><td class="dom">Quantify Business Value</td><td class="cap"><strong>Forecasting + Unit Economics</strong> — cost/query × volume, run pre-build</td></tr>
+        <tr><td class="step">5 · Evaluations</td><td class="dom">Understand + Quantify</td><td class="cap"><strong>Anomaly Management + Unit Economics</strong> — drift as cost-event; cost-per-quality-point</td></tr>
+        <tr><td class="step">6 · 30-Day Plan</td><td class="dom">Inform → Optimize → Operate</td><td class="cap"><strong>Maturity phases</strong> — baseline, then optimize, then govern</td></tr>
+        <tr><td class="step">7 · Team &amp; Ethics</td><td class="dom">Manage the Practice</td><td class="cap"><strong>Education &amp; Enablement · Policy &amp; Governance · Sustainability</strong></td></tr>
+        <tr><td class="step">Ref · Model Tiering</td><td class="dom">Optimize Usage &amp; Cost</td><td class="cap"><strong>Rate Optimization</strong> — a router is the token-era committed-use discount</td></tr>
+      </tbody>
+    </table>
+    <div class="finops-cap"><span class="cap-label">Positioning note</span> The FinOps Foundation introduced a <strong>FinOps for AI</strong> certification and treats AI/GenAI as a Scope under Framework 2025 — so this mapping speaks the same language a CFP audience already uses.</div>
+  </div>
+
+  <!-- Model Tiering Reference -->
+  <div class="card full gold-accent">
+    <div class="step-badge gold-badge">Reference — Model Tiering Policy</div>
+    <h2>Build a router, not a default</h2>
+    <p class="tagline">Cost architecture starts with model selection. Think in <strong>relative spread</strong>, not sticker price — rate cards reprice every few months, the routing discipline doesn't. Input-cost spread across tiers runs roughly <strong>5–50×</strong>. Named models and prices are a June 2026 snapshot; verify live rates before quoting.</p>
+    <div class="tiers">
+      <div class="tier tier-1">
+        <div class="tier-label">Tier 1 — Route &amp; classify</div>
+        <div class="tier-name">Haiku · GPT-5.4 Nano · Gemini Flash-Lite class</div>
+        <div class="tier-use">Routing, classification, entity extraction, guardrail checks, structured summarization. Never needs frontier capability.</div>
+        <div class="tier-price">≈ 1× baseline · ~$0.10–$1.00 / MTok in</div>
+        <span class="tag tag-savings">Your cost floor — route here first</span>
+      </div>
+      <div class="tier tier-2">
+        <div class="tier-label">Tier 2 — Balanced workhorse</div>
+        <div class="tier-name">Sonnet · GPT-5.4 · Gemini Pro class</div>
+        <div class="tier-use">Draft generation, code explanation, multi-turn conversation, moderate reasoning. The default for most product features.</div>
+        <div class="tier-price">≈ 3–5× Tier 1 · ~$2.50–$3.00 / MTok in</div>
+        <span class="tag tag-action">Default for most features</span>
+      </div>
+      <div class="tier tier-3">
+        <div class="tier-label">Tier 3 — Frontier (gated)</div>
+        <div class="tier-name">Opus · GPT-5.5 · GPT-5.5 Pro class</div>
+        <div class="tier-use">LLM-as-judge evals, complex multi-document synthesis, high-stakes reasoning. Gate behind explicit routing — never the default.</div>
+        <div class="tier-price">≈ 5–30× Tier 1 · ~$5–$30 / MTok in</div>
+        <span class="tag tag-risk">Explicit routing required</span>
+      </div>
+    </div>
+    <div class="finops-cap"><span class="cap-label">FinOps Capability</span> <strong>Rate Optimization</strong> (Optimize Usage &amp; Cost) — pay the lowest rate that clears the quality bar. <strong>2026 reality check:</strong> the frontier-to-balanced gap has compressed (Opus ≈ 1.7× Sonnet, not the 3–6× of the older Opus generation), so Tier 1 routing plus rate levers — prompt caching (~90% off cached input) and batch (50% off) — now drive more savings than avoiding frontier alone.</div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-creds">Sumaira Nazir &nbsp;·&nbsp; PMP | CGEIT | FinOps Professional &nbsp;·&nbsp; FinOps Foundation FOCUS Working Group Contributor</div>
+
+  <div class="footer-disclaimer">
+    <strong>On the numbers.</strong> All savings percentages, cost ratios, and pricing figures in this framework are <strong>estimates and directional benchmarks</strong>, not guarantees. Real-world impact varies significantly by enterprise scope, workload profile, and industry. A healthcare research organization running large-context discovery and drug-candidate synthesis workloads will see a fundamentally different cost profile than a PaaS/SaaS provider serving high-volume, latency-sensitive customer-facing APIs — even at identical token volumes. Provider pricing models (Anthropic, OpenAI, Google) change frequently; the model names and rates referenced here reflect a <strong>June 2026 snapshot</strong>. Always validate against live rate cards, your own telemetry, and business-specific trade-offs before committing to budget targets.
+  </div>
+
+  <div class="footer-disclaimer">
+    <strong>On executive alignment.</strong> This framework does not include Executive Strategy Alignment as a separate step — intentionally. Executive alignment is not a phase; it is a <strong>continuous thread</strong> that runs through every step of the lifecycle. Cost viability gates (Step 4), budget governance (Step 6), and shift-left ownership (Step 7) all require executive sponsorship to succeed. Treating alignment as a discrete milestone risks it becoming a one-time sign-off rather than the ongoing accountability loop it needs to be.
+  </div>
+
+  <div class="footer-print">FinOps Thinking for AI Product Development &nbsp;·&nbsp; Print at full page width &nbsp;·&nbsp; Letter or A4 &nbsp;·&nbsp; Scale to fit</div>
+</footer>
+
+</body>
+</html>
