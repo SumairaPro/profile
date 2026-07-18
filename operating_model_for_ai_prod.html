@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
-<!-- saved from url=(0064)https://sumairapro.github.io/profile/FinOps_AI_Product_Mang.html -->
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FinOps for AI — An Operating Model for AI Products</title>
+<title>FinOps for AI — An Operating Model for the AI Product Lifecycle</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Manrope:wght@300;400;500;600;700&display=swap');
 
@@ -162,6 +162,37 @@
 
   .cap-note b, .cap-note strong {
     color: #6FD6C4;
+  }
+
+  .scope-note {
+    background: rgba(20, 20, 43, 0.7);
+    border-left: 4px solid var(--gold);
+    padding: 18px 22px;
+    margin: 28px 0;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--cream-soft);
+  }
+
+  .scope-note b, .scope-note strong {
+    color: var(--gold-bright);
+  }
+
+  .owner {
+    margin: 18px 0 0;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--cream-muted);
+  }
+
+  .owner b {
+    color: var(--gold);
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 11px;
+    margin-right: 6px;
   }
 
   .section {
@@ -377,6 +408,45 @@
     flex-shrink: 0;
   }
 
+  /* ---------- KPI Table ---------- */
+
+  table.kpi {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 32px 0;
+    font-size: 15px;
+  }
+
+  table.kpi th {
+    text-align: left;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: var(--gold-bright);
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  table.kpi td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--indigo-line);
+    color: var(--cream-soft);
+    line-height: 1.5;
+  }
+
+  table.kpi tr:last-child td {
+    border-bottom: none;
+  }
+
+  table.kpi td:first-child {
+    color: var(--cream);
+    font-weight: 600;
+  }
+
+  table.kpi td:nth-child(2) {
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
   /* ---------- Footer ---------- */
 
   .signature {
@@ -425,6 +495,8 @@
     h1.title { font-size: 36px; }
     .subtitle { font-size: 16px; margin-bottom: 40px; }
     .tier-grid { grid-template-columns: 1fr; }
+    table.kpi { font-size: 13.5px; }
+    table.kpi th, table.kpi td { padding: 10px 8px; }
   }
 </style>
 </head>
@@ -434,9 +506,9 @@
 
   <div class="eyebrow">FinOps for AI · Framework 2026 Alignment</div>
 
-  <h1 class="title">FinOps for AI — An Operating Model for the AI Products</h1>
+  <h1 class="title">FinOps for AI — An Operating Model for the AI Product Lifecycle</h1>
 
-  <p class="subtitle">Cost controls mapped to every phase of the AI product lifecycle — and to the FinOps Framework 2026 capabilities behind them.</p>
+  <p class="subtitle">Cost controls mapped to every phase of building an AI product — and to the FinOps Framework 2026 capabilities behind them.</p>
 
   <div class="byline">
     <span>Sumaira Nazir</span>
@@ -444,7 +516,9 @@
     <span>FinOps Professional · FOCUS Analyst</span>
   </div>
 
-  <p class="lead">98% of FinOps practices now manage AI spend — State of FinOps 2026. The token is the billing unit. Prompt design and agent architecture are now FinOps decisions. Here is the complete operating model.</p>
+  <p class="lead">80–90% of AI spend sits in inference, not training — and 98% of FinOps practices now manage it (State of FinOps 2026). The token is the billing unit. Prompt design and agent architecture are FinOps decisions now, not engineering afterthoughts. Here is the complete operating model, from first token to executive review.</p>
+
+  <div class="scope-note"><b>Scope note.</b> This model covers API- and token-based AI consumption — the dominant pattern for AI product teams. Self-hosted GPU inference is a distinct scope with its own economics: operational GPU utilization commonly runs 15–30%, which makes utilization, not tokens, the primary lever there.</div>
 
   <div class="divider">
     <span class="line"></span>
@@ -453,20 +527,38 @@
   </div>
 
   <div class="section">
-    <h2><span class="marker">1.</span>LLM Basics</h2>
-    <p>Understand the cost model before you write a line of code. The token is the billing unit — always.</p>
-    <div class="cap-note"><b>FinOps Capability · Data Ingestion (Understand Usage &amp; Cost)</b> — Token telemetry is your billing feed, the AI equivalent of a FOCUS / CUR export. In 2026, FOCUS accommodates AI's abstracted meters — tokens, API calls, outcome-based units — so treat your token log as a FOCUS-aligned dataset from day one.</div>
+    <h2><span class="marker">1.</span>Understand the Cost Model</h2>
+    <p>Understand the cost model before you write a line of code. The token is the billing unit — always. Input, output, and cached tokens price differently, and output typically runs 3–5× the cost of input.</p>
+
+    <div class="cap-note"><b>FinOps Capability · Data Ingestion (Understand Usage &amp; Cost)</b> — Token telemetry is your billing feed, the AI equivalent of a FOCUS / CUR export. FOCUS accommodates AI's abstracted meters — tokens, API calls, outcome-based units — so treat your token log as a FOCUS-aligned dataset from day one. This is why telemetry starts at the token: 80–90% of AI spend sits in inference, not training.</div>
+
+    <div class="lever-list">
+      <div class="lever"><div class="arrow">→</div><div class="ltext"><b>Instrument from day one.</b> Log prompt_tokens, completion_tokens, model_id, feature_name, and latency_ms on every call — this is the one dataset every later phase depends on.</div></div>
+    </div>
+
+    <p class="owner"><b>Owner</b> FinOps practitioner + platform engineering.</p>
   </div>
 
   <div class="section">
     <h2><span class="marker">2.</span>Context Design</h2>
-    <p>Prompt engineering and RAG architecture are FinOps decisions. Prompt caching is the highest-ROI lever available. Most important — 60–80% of cost decided here.</p>
+    <p>Prompt engineering and RAG architecture are FinOps decisions now. In my field experience, 60–80% of a feature's lifetime unit cost is locked in at this stage — a practitioner heuristic, not a published benchmark, but every token audit I've run points the same direction.</p>
+
     <div class="cap-note"><b>FinOps Capability · Architecting for Cost (Usage Optimization, Pre-Deploy)</b> — Prompt and RAG design is right-sizing before deploy, the highest-leverage usage-optimization decision in the lifecycle. "Architecting for Cost" is the AI translation of the framework's Architecting capability.</div>
+
+    <div class="lever-list">
+      <div class="lever"><div class="arrow">→</div><div class="ltext"><b>Size inputs early.</b> Estimate avg input/output tokens × volume × price/MTok before choosing a model.</div></div>
+      <div class="lever"><div class="arrow">→</div><div class="ltext"><b>Cache stable prompts.</b> Prompt caching deflects 50–90% of input cost on repeated system prompts. Tag cacheable vs. dynamic content explicitly — cache hit rate is a direct cost-avoidance signal.</div></div>
+      <div class="lever"><div class="arrow">→</div><div class="ltext"><b>Compress relentlessly.</b> A 2,000-token system prompt sent 500K times/day ≈ $1,500/day at $1.50/MTok — audit and trim on a schedule.</div></div>
+      <div class="lever"><div class="arrow">→</div><div class="ltext"><b>Constrain retrieval.</b> Set max_chunks limits and similarity thresholds — over-retrieval is the most common hidden cost driver in RAG.</div></div>
+      <div class="lever"><div class="arrow">→</div><div class="ltext"><b>Gate fine-tuning on break-even.</b> Model training cost ÷ daily prompt savings before committing.</div></div>
+    </div>
+
+    <p class="owner"><b>Owner</b> Product engineering, with FinOps embedded at design review.</p>
   </div>
 
   <div class="section">
     <h2><span class="marker">3.</span>Build Agents</h2>
-    <p>Agents are cost multipliers — every tool call, memory retrieval, and guardrail check adds token spend.</p>
+    <p>Agents are cost multipliers — every tool call, memory retrieval, and guardrail check adds token spend. And the governance reality is this: a lean FinOps team cannot manually review agent behavior generating thousands of economic events an hour. Automated guardrails are the only control that runs at the same speed as the spend.</p>
 
     <div class="mini-grid">
       <div class="mini-card">
@@ -492,29 +584,25 @@
     </div>
 
     <div class="cap-note"><b>FinOps Capability · Anomaly Management + Allocation (Understand Usage &amp; Cost)</b> — Loop circuit breakers are anomaly control; per-tool and per-agent logging is the allocation key that makes agent spend attributable.</div>
+
+    <p class="owner"><b>Owner</b> Engineering builds the controls; FinOps sets the thresholds and owns the anomaly response.</p>
   </div>
 
   <div class="section">
-    <h2><span class="marker">4.</span>5-D Validation + Cost Viability</h2>
-    <p>Standard AI validation covers five dimensions — accuracy, relevance, safety, grounding, and latency. This step adds a sixth: can the feature's unit economics survive at scale? Validate the business case before a single dollar is spent on infrastructure.</p>
-    <p><b>$cost/query × daily volume × 30 days = monthly forecast</b>, weighed against ARR impact per user and a 10× scale cost check.</p>
+    <h2><span class="marker">4.</span>Validation &amp; the Sixth Dimension</h2>
+    <p>Standard AI validation covers five dimensions — accuracy, relevance, safety, grounding, and latency. This framework adds a sixth: can the feature's unit economics survive at scale? Validate the business case before a single dollar is spent on infrastructure.</p>
+    <p><b>$cost/query × daily volume × 30 days = monthly forecast</b>, weighed against measurable value per use and a 10× scale cost check.</p>
 
     <div class="cap-note"><b>2026 Refinement — Calibrate the gate to maturity.</b> Framework 2026's FinOps for AI guidance is explicit: early-stage AI should tolerate higher waste, shorter forecast windows, and relaxed business-case requirements. Over-policing experiments kills exploration — hard viability gates belong at scale-up; light, time-boxed funding with frequent review belongs at discovery.</div>
     <div class="cap-note"><b>FinOps Capability · Forecasting + Unit Economics (Quantify Business Value)</b> — Cost-per-query × volume is forecasting run pre-build; the value-per-use gate is unit economics applied before a dollar of infra is spent.</div>
 
     <div class="lever-list">
-      <div class="lever"><div class="arrow">→</div><div class="ltext"><b>Size inputs early.</b> Estimate avg input/output tokens × volume × price/MTok before choosing a model.</div></div>
-      <div class="lever"><div class="arrow">→</div><div class="ltext"><b>Model tiering policy.</b> Cheap models for routing/classification; frontier models only for synthesis or judgment.</div></div>
-      <div class="lever"><div class="arrow">→</div><div class="ltext"><b>Cache stable prompts.</b> Prompt caching deflects 50–90% of input cost on repeated system prompts.</div></div>
-      <div class="lever"><div class="arrow">→</div><div class="ltext"><b>Instrument from day 1.</b> Log prompt_tokens, completion_tokens, model_id, feature_name, latency_ms on every call.</div></div>
-      <div class="lever"><div class="arrow">→</div><div class="ltext"><b>Prompt compression.</b> A 2,000-token system prompt sent 500K times/day ≈ $1,500/day at $1.50/MTok — audit and trim regularly.</div></div>
-      <div class="lever"><div class="arrow">→</div><div class="ltext"><b>RAG chunk strategy.</b> Set max_chunks limits and similarity thresholds — over-retrieval is a hidden cost driver.</div></div>
-      <div class="lever"><div class="arrow">→</div><div class="ltext"><b>Fine-tune break-even gate.</b> Model the break-even: training cost ÷ daily prompt savings before committing.</div></div>
-      <div class="lever"><div class="arrow">→</div><div class="ltext"><b>Tag cacheable vs. dynamic content</b> explicitly in architecture. Cache hit rate is a direct cost-avoidance signal.</div></div>
       <div class="lever"><div class="arrow">→</div><div class="ltext"><b>Cost viability gate.</b> Estimate cost-per-query × expected volume = projected monthly spend. Kill projects that can't pencil out at scale.</div></div>
       <div class="lever"><div class="arrow">→</div><div class="ltext"><b>Value attribution.</b> A feature with $0.05/use AI cost must generate more than $0.05 in measurable value (retention, time saved, conversion).</div></div>
       <div class="lever"><div class="arrow">→</div><div class="ltext"><b>Scale cost modeling.</b> Stress-test at 10× and 100× load. Many AI architectures are cheap at 1K users, ruinous at 1M.</div></div>
     </div>
+
+    <p class="owner"><b>Owner</b> Product management owns the business case; FinOps owns the forecast model and the gate criteria.</p>
   </div>
 
   <div class="section">
@@ -545,10 +633,52 @@
     </div>
 
     <div class="cap-note"><b>FinOps Capability · Anomaly Management + Unit Economics</b> — Drift wired to anomaly detection is a cost-event detector; cost-per-quality-point is the unit-economics metric that links quality regression to spend.</div>
+
+    <p class="owner"><b>Owner</b> ML / quality engineering, with cost-per-quality-point reported in the FinOps cadence.</p>
   </div>
 
   <div class="section">
-    <h2><span class="marker">6.</span>Execute a 30-Day Plan</h2>
+    <h2><span class="marker">6.</span>Rate Optimization</h2>
+    <p>Usage optimization (Phases 2–5) decides how many tokens you consume. Rate optimization decides what you pay per token. Four levers, roughly in order of effort-to-impact.</p>
+
+    <div class="tier-grid">
+      <div class="tier t1">
+        <div class="tname">Route &amp; Classify</div>
+        <div class="tmodels">Nano-class — e.g., Haiku, GPT nano-tier, Gemini Flash-Lite</div>
+        <div class="body">Routing, classification, entity extraction, guardrail checks, structured summarization. Never needs frontier capability.</div>
+        <div class="price">~$0.10–$1.00 / MTok in</div>
+        <div class="badge">Your cost floor — route here first</div>
+      </div>
+      <div class="tier t2">
+        <div class="tname">Balanced Workhorse</div>
+        <div class="tmodels">Workhorse-class — e.g., Sonnet, GPT mainline, Gemini Pro</div>
+        <div class="body">Draft generation, code explanation, multi-turn conversation, moderate reasoning. The default for most product features.</div>
+        <div class="price">~$1–$3 / MTok in</div>
+        <div class="badge">Default for most features</div>
+      </div>
+      <div class="tier t3">
+        <div class="tname">Frontier (Gated)</div>
+        <div class="tmodels">Frontier-class — e.g., Opus, top-end GPT &amp; Gemini tiers</div>
+        <div class="body">LLM-as-judge evals, complex multi-document synthesis, high-stakes reasoning. Gate behind explicit routing — never the default.</div>
+        <div class="price">~$5–$30 / MTok in</div>
+        <div class="badge">Explicit routing required</div>
+      </div>
+    </div>
+
+    <p>Input costs span roughly two orders of magnitude across tiers. Think in <b>relative spread</b>, not sticker price. Named models and prices are a mid-2026 snapshot; verify live rates before quoting.</p>
+
+    <div class="lever-list">
+      <div class="lever"><div class="arrow">→</div><div class="ltext"><b>Batch processing.</b> Async batch APIs commonly run at ~50% discount — evals, backfills, enrichment, and reporting workloads rarely need real-time pricing.</div></div>
+      <div class="lever"><div class="arrow">→</div><div class="ltext"><b>Commitments.</b> As AI spend stabilizes, provisioned throughput and enterprise commitment agreements become negotiable — the AI analog of reserved capacity. Track effective savings rate and utilization on every commitment, the same discipline FinOps already runs on cloud.</div></div>
+    </div>
+
+    <div class="cap-note"><b>FinOps Capability · Rate Optimization (Optimize Usage &amp; Cost)</b> — Pay the lowest rate that clears the quality bar. In 2026 practice, tier routing plus caching and batching drive the majority of realized AI savings — before a single commitment is signed.</div>
+
+    <p class="owner"><b>Owner</b> FinOps owns rate strategy and commitments; engineering owns the router.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="marker">7.</span>Execute a 30-Day Operating Cadence</h2>
     <p>Each week has a distinct cost-control stance — from unconstrained learning to disciplined optimization.</p>
 
     <div class="mini-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
@@ -581,17 +711,19 @@
         <ul style="margin-top:12px; padding-left:18px; font-size:15.5px; line-height:1.55;">
           <li>Only after understanding cost distribution, set budget alerts and caps.</li>
           <li>Prioritize: prompt compression, caching, model downtiering — in that order.</li>
-          <li>Set anomaly thresholds at 150% of forecast spend as your first gate.</li>
+          <li>Set anomaly thresholds at 150% of forecast spend as your first gate — tighten as forecast accuracy improves.</li>
         </ul>
       </div>
     </div>
 
     <div class="cap-note"><b>FinOps Phases · Inform → Optimize → Operate</b> — This cadence is the FinOps maturity arc: baseline first (Inform), optimize second, then govern with budgets and gates (Operate). Caps before understanding is the classic anti-pattern — State of FinOps 2026 shows practitioners prioritizing understand-and-structure capabilities before reduction.</div>
+
+    <p class="owner"><b>Owner</b> FinOps practitioner runs the cadence; product and engineering leads join weekly.</p>
   </div>
 
   <div class="section">
-    <h2><span class="marker">7.</span>Team &amp; Ethics</h2>
-    <p>Unmonitored AI spend has environmental impact, equity implications, and governance risk — and this is as much an ethical obligation as a financial one.</p>
+    <h2><span class="marker">8.</span>Governance, Culture &amp; Responsible AI Spend</h2>
+    <p>Unmonitored AI spend has environmental impact, equity implications, and governance risk — and this is as much an ethical obligation as a financial one. Framework 2026 formalized that view, strengthening Governance, Policy &amp; Risk and broadening the Sustainability capability across every technology category, not just cloud.</p>
 
     <div class="mini-grid">
       <div class="mini-card">
@@ -605,7 +737,7 @@
         <span class="clabel">Gate expensive actions</span>
       </div>
       <div class="mini-card">
-        <div class="ctitle">Carbon FinOps</div>
+        <div class="ctitle">Sustainability</div>
         <p>AI inference has a measurable carbon footprint. Larger models, longer contexts, and unnecessary retries increase carbon spend. Track token efficiency as a sustainability metric.</p>
         <span class="clabel">Token efficiency = green KPI</span>
       </div>
@@ -621,52 +753,71 @@
       </div>
       <div class="mini-card">
         <div class="ctitle">Model Tiering Governance</div>
-        <p>Never allow a frontier model as the unchallenged default. Require explicit routing justification for any Tier 3 usage — a rules-based router can cut model spend 60–80%.</p>
+        <p>Never allow a frontier model as the unchallenged default. Require explicit routing justification for any frontier-tier usage — a rules-based router can cut model spend 60–80%.</p>
         <span class="clabel">Router beats default model</span>
       </div>
     </div>
 
-    <div class="cap-note"><b>FinOps Capability · Education &amp; Enablement · Governance, Policy &amp; Risk · Sustainability (Manage the FinOps Practice)</b> — Shift-left ownership is enablement plus chargeback; approval gates and tier policy are governance and risk (the 2026 addition); carbon-per-token is the sustainability capability applied to AI.</div>
+    <div class="cap-note"><b>FinOps Capability · Education &amp; Enablement · Governance, Policy &amp; Risk · Sustainability (Manage the FinOps Practice)</b> — Shift-left ownership is enablement plus chargeback; approval gates and tier policy are governance and risk; carbon-per-token is the sustainability capability applied to AI.</div>
+
+    <p class="owner"><b>Owner</b> FinOps chairs the review; engineering and product own their metrics; leadership sees the trend line.</p>
+  </div>
+
+  <div class="divider">
+    <span class="line"></span>
+    <span class="ornament">§</span>
+    <span class="line"></span>
   </div>
 
   <div class="section">
-    <h2><span class="marker">Reference</span> FinOps Framework 2026 Mapping</h2>
-    <p>Every step is an established FinOps Capability — applied to the AI Technology Category. Framework 2026 elevated AI to a first-class Technology Category (FinOps for AI) and added Scopes, making AI a defined segment of spending aligned to business constructs.</p>
+    <h2><span class="marker">For Leadership</span>The Executive Layer</h2>
+    <p>Framework 2026 added Executive Strategy Alignment as a new capability, and the reporting-line data explains why: 78% of FinOps practices now report to the CTO or CIO (State of FinOps 2026). AI cost is no longer a finance audit topic — it belongs in the same conversation as roadmap and architecture. Four questions this operating model should let you answer.</p>
+
+    <ol class="framework">
+      <li>Can we state cost-per-outcome for every AI feature in production? If not, fund Phase 1 instrumentation before funding more features.</li>
+      <li>Is any frontier model running as an unjustified default? One routing policy decision can move spend 60–80%.</li>
+      <li>Are agent workloads governed by automated circuit breakers? Human review does not scale to machine-speed spend.</li>
+      <li>Do our AI experiments have graduated gates? Discovery gets light, time-boxed funding; scale-up gets hard viability gates. Both are failures if applied to the wrong stage.</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="marker">Reference</span>Measures of Success by Phase</h2>
+    <p>Every phase above maps to a KPI leadership can track without reading the whole framework.</p>
+
+    <table class="kpi">
+      <tr><th>KPI</th><th>Phase</th><th>What it tells you</th></tr>
+      <tr><td>Cost per query (by feature)</td><td>1, 4</td><td>The atomic unit of AI cost</td></tr>
+      <tr><td>Cost per active user</td><td>4, 7</td><td>Unit economics at the customer level</td></tr>
+      <tr><td>Cache hit rate / deflection %</td><td>2, 6</td><td>Cost avoidance from architecture</td></tr>
+      <tr><td>Token distribution (p50/p90/p99)</td><td>1, 7</td><td>Tail queries driving disproportionate spend</td></tr>
+      <tr><td>Model tier mix (nano/workhorse/frontier)</td><td>6</td><td>Routing discipline</td></tr>
+      <tr><td>Cost-per-quality-point</td><td>5</td><td>AI efficiency: quality gained per dollar</td></tr>
+      <tr><td>Anomaly threshold vs. forecast variance</td><td>3, 7</td><td>Governance maturity</td></tr>
+      <tr><td>Effective savings rate on commitments</td><td>6</td><td>Rate optimization performance</td></tr>
+      <tr><td>Carbon per token / per query</td><td>8</td><td>Sustainability trajectory</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2><span class="marker">Reference</span>FinOps Framework 2026 Mapping</h2>
+    <p>Every phase above is an established FinOps Capability applied to the FinOps for AI Technology Category. Scopes were introduced as a core Framework element in 2025; Framework 2026 built on that by adding Technology Categories — structured guidance on how Capabilities, Personas, and KPIs apply within a category, including AI — alongside a new Executive Strategy Alignment capability and an updated FinOps definition aligned to the Foundation's expanded mission: advancing the people who manage the value of <em>technology</em>, not just cloud.</p>
 
     <div class="cap-note">
-      <b>How this maps to the FinOps for AI Technology Category (Framework 2026).</b> The 2026 Technology Category pages follow a five-part structure — this lifecycle covers all five: Considerations, Personas, Capabilities, KPIs, and FOCUS Alignment.
+      <b>How this maps to the FinOps for AI Technology Category (Framework 2026).</b> The 2026 Technology Category pages follow a five-part structure — this lifecycle covers all five: Considerations (Phases 1–2), Personas (the Owner line in every phase), Capabilities (every cap-note above), KPIs (the reference table), and FOCUS Alignment (Phase 1).
     </div>
   </div>
 
+  <div class="divider">
+    <span class="line"></span>
+    <span class="ornament">§</span>
+    <span class="line"></span>
+  </div>
+
   <div class="section">
-    <h2><span class="marker">Reference</span> Model Tiering Policy</h2>
-    <p>Cost architecture starts with model selection. Think in <b>relative spread</b>, not sticker price. Input-cost spread across tiers runs roughly 5–50×. Named models and prices are a June 2026 snapshot; verify live rates before quoting.</p>
-
-    <div class="tier-grid">
-      <div class="tier t1">
-        <div class="tname">Tier 1 — Route &amp; Classify</div>
-        <div class="tmodels">Haiku · GPT-5.4 Nano · Gemini Flash-Lite class</div>
-        <div class="body">Routing, classification, entity extraction, guardrail checks, structured summarization. Never needs frontier capability.</div>
-        <div class="price">≈ 1× baseline · ~$0.10–$1.00 / MTok in</div>
-        <div class="badge">Your cost floor — route here first</div>
-      </div>
-      <div class="tier t2">
-        <div class="tname">Tier 2 — Balanced Workhorse</div>
-        <div class="tmodels">Sonnet · GPT-5.4 · Gemini Pro class</div>
-        <div class="body">Draft generation, code explanation, multi-turn conversation, moderate reasoning. The default for most product features.</div>
-        <div class="price">≈ 3–5× Tier 1 · ~$2.50–$3.00 / MTok in</div>
-        <div class="badge">Default for most features</div>
-      </div>
-      <div class="tier t3">
-        <div class="tname">Tier 3 — Frontier (Gated)</div>
-        <div class="tmodels">Opus · GPT-5.5 · GPT-5.5 Pro class</div>
-        <div class="body">LLM-as-judge evals, complex multi-document synthesis, high-stakes reasoning. Gate behind explicit routing — never the default.</div>
-        <div class="price">≈ 5–30× Tier 1 · ~$5–$30 / MTok in</div>
-        <div class="badge">Explicit routing required</div>
-      </div>
-    </div>
-
-    <div class="cap-note"><b>FinOps Capability · Rate Optimization (Optimize Usage &amp; Cost)</b> — Pay the lowest rate that clears the quality bar. 2026 reality check: Tier 1 routing plus prompt caching and batching now drive the majority of savings.</div>
+    <h2>Start Monday</h2>
+    <blockquote>If you take one action from this framework: instrument prompt_tokens, completion_tokens, model_id, and feature_name on every LLM call, and put a 30-minute unit economics review on the calendar. Everything else here builds on those two moves.</blockquote>
+    <p>I built this framework from managing multi-cloud and AI spend in production, and from the FinOps Foundation working groups I contribute to. I'd genuinely like to pressure-test it against your environment — which phase is hardest where you work: instrumentation, agent governance, or the viability gate?</p>
   </div>
 
   <div class="signature">
