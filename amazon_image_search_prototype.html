@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amazon Image Search — Prototype by Sumaira</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Arial,sans-serif;background:#e8e8e8;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:20px;}
+  h1.proto-title{font-size:13px;color:#555;margin-bottom:10px;letter-spacing:1px;text-transform:uppercase;text-align:center;}
+
+  /* Flow indicator */
+  .flow-bar{display:flex;align-items:center;gap:0;margin-bottom:14px;}
+  .flow-step{background:#fff;border:1px solid #ccc;border-radius:20px;padding:5px 14px;font-size:11px;color:#888;cursor:pointer;transition:all 0.2s;}
+  .flow-step.active{background:#131921;color:#ff9900;border-color:#131921;font-weight:700;}
+  .flow-step.done{background:#f0f0f0;color:#555;border-color:#bbb;}
+  .flow-arrow{font-size:14px;color:#bbb;padding:0 4px;}
+
+  /* Browser chrome */
+  .browser{width:960px;max-width:100%;background:#f1f3f4;border-radius:10px;overflow:hidden;border:1px solid #ccc;}
+  .browser-bar{background:#dee1e6;padding:10px 14px;display:flex;align-items:center;gap:10px;}
+  .browser-dots{display:flex;gap:5px;}
+  .browser-dots span{width:11px;height:11px;border-radius:50%;display:inline-block;}
+  .bd-r{background:#ff5f57;} .bd-y{background:#febc2e;} .bd-g{background:#28c840;}
+  .browser-url{flex:1;background:#fff;border-radius:20px;padding:4px 14px;font-size:12px;color:#444;border:1px solid #ccc;}
+
+  /* Screens */
+  .screen{display:none;background:#fff;}
+  .screen.active{display:block;}
+
+  /* Amazon nav */
+  .amz-nav{background:#131921;padding:10px 20px;display:flex;align-items:center;gap:14px;}
+  .amz-logo{color:#ff9900;font-weight:900;font-size:24px;letter-spacing:-1px;flex-shrink:0;}
+  .amz-logo span{color:#fff;}
+  .amz-logo sub{font-size:10px;color:#ff9900;vertical-align:bottom;}
+  .deliver{color:#ccc;font-size:10px;line-height:1.2;flex-shrink:0;}
+  .deliver strong{color:#fff;font-size:12px;display:block;}
+  .search-wrap{flex:1;display:flex;align-items:stretch;border-radius:4px;overflow:hidden;border:3px solid #ff9900;}
+  .search-cat{background:#f3f3f3;border:none;border-right:1px solid #ccc;padding:0 8px;font-size:11px;color:#555;cursor:pointer;}
+  .search-input{flex:1;border:none;outline:none;padding:8px 12px;font-size:14px;color:#333;}
+  .search-cam{background:#fff;border:none;border-left:1px solid #e0e0e0;padding:0 12px;cursor:pointer;display:flex;align-items:center;gap:4px;font-size:20px;}
+  .cam-new{background:#cc0c39;color:#fff;font-size:8px;font-weight:700;padding:1px 4px;border-radius:2px;vertical-align:super;line-height:1;}
+  .search-btn{background:#febd69;border:none;padding:0 14px;cursor:pointer;font-size:18px;color:#333;transition:background 0.2s;}
+  .search-btn:hover{background:#f3a847;}
+  .amz-right{display:flex;align-items:center;gap:14px;flex-shrink:0;}
+  .amz-right a{color:#fff;font-size:12px;text-decoration:none;line-height:1.2;cursor:pointer;}
+  .amz-right a span{font-weight:700;font-size:13px;display:block;}
+  .cart-icon{font-size:22px;position:relative;}
+  .cart-count{position:absolute;top:-6px;right:-6px;background:#ff9900;color:#fff;font-size:9px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+
+  .amz-nav2{background:#232f3e;padding:6px 20px;display:flex;align-items:center;gap:20px;}
+  .amz-nav2 a{color:#fff;font-size:13px;text-decoration:none;cursor:pointer;white-space:nowrap;}
+  .amz-nav2 a:hover{text-decoration:underline;}
+  .amz-nav2 a.bold{font-weight:700;}
+
+  /* SCREEN 1 — Home */
+  .hero-banner{background:linear-gradient(135deg,#e3f2fd,#bbdefb);padding:32px 40px;display:flex;align-items:center;justify-content:space-between;}
+  .hero-text h2{font-size:26px;color:#131921;margin-bottom:8px;line-height:1.3;}
+  .hero-text p{font-size:14px;color:#555;margin-bottom:20px;max-width:420px;line-height:1.6;}
+  .hero-text .cta-btn{background:#ff9900;border:none;border-radius:24px;padding:12px 28px;font-size:14px;font-weight:700;cursor:pointer;color:#131921;display:inline-flex;align-items:center;gap:8px;transition:background 0.2s;}
+  .hero-text .cta-btn:hover{background:#f3a847;}
+  .hero-visual{background:#fff;border-radius:12px;padding:20px;border:1px solid #ddd;min-width:240px;text-align:center;}
+  .hero-visual .cam-big{font-size:52px;margin-bottom:8px;}
+  .hero-visual p{font-size:12px;color:#888;line-height:1.4;}
+
+  .section-title{font-size:18px;font-weight:700;color:#131921;padding:16px 20px 8px;}
+  .products-row{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:#e0e0e0;border-top:1px solid #e0e0e0;}
+  .prod-card{background:#fff;padding:14px 12px;cursor:pointer;transition:box-shadow 0.2s;}
+  .prod-card:hover{box-shadow:0 2px 8px rgba(0,0,0,0.15);z-index:1;position:relative;}
+  .prod-img{width:100%;height:90px;background:#f5f5f5;border-radius:6px;margin-bottom:8px;display:flex;align-items:center;justify-content:center;font-size:36px;}
+  .prod-name{font-size:11px;color:#333;margin-bottom:4px;line-height:1.3;height:30px;overflow:hidden;}
+  .prod-price{font-size:14px;font-weight:700;color:#cc0c39;}
+  .prod-stars{font-size:10px;color:#ff9900;margin-bottom:2px;}
+  .prod-prime{font-size:10px;color:#007185;font-weight:700;}
+
+  .feature-strip{background:#fff8e1;border-top:2px solid #ff9900;padding:12px 20px;display:flex;align-items:center;gap:16px;}
+  .feature-strip .icon{font-size:24px;}
+  .feature-strip p{font-size:13px;color:#333;} .feature-strip strong{color:#131921;}
+
+  /* SCREEN 2 — Modal */
+  .modal-overlay{background:rgba(0,0,0,0.6);min-height:600px;display:flex;align-items:center;justify-content:center;padding:20px;}
+  .modal{background:#fff;border-radius:10px;width:380px;overflow:hidden;border:1px solid #ddd;}
+  .modal-head{background:#131921;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;}
+  .modal-head h3{color:#fff;font-size:15px;display:flex;align-items:center;gap:8px;}
+  .modal-head .close-btn{background:none;border:none;color:#aaa;font-size:22px;cursor:pointer;line-height:1;padding:0;}
+  .modal-head .close-btn:hover{color:#fff;}
+  .modal-body{padding:24px;}
+  .drop-zone{border:2px dashed #ff9900;border-radius:10px;padding:32px 20px;text-align:center;cursor:pointer;background:#fffdf7;margin-bottom:16px;transition:background 0.2s;}
+  .drop-zone:hover{background:#fff8e1;}
+  .drop-zone .dz-icon{font-size:40px;margin-bottom:10px;}
+  .drop-zone h4{font-size:14px;color:#131921;margin-bottom:4px;}
+  .drop-zone p{font-size:12px;color:#888;}
+  .or-line{display:flex;align-items:center;gap:10px;margin:14px 0;color:#aaa;font-size:12px;}
+  .or-line::before,.or-line::after{content:'';flex:1;height:1px;background:#e0e0e0;}
+  .url-row{display:flex;gap:8px;margin-bottom:14px;}
+  .url-row input{flex:1;border:1px solid #d5d9d9;border-radius:6px;padding:8px 12px;font-size:13px;outline:none;}
+  .url-row input:focus{border-color:#ff9900;}
+  .url-row button{background:#febd69;border:none;border-radius:6px;padding:8px 16px;font-size:13px;font-weight:700;cursor:pointer;color:#131921;}
+  .upload-btn{width:100%;background:#ff9900;border:none;border-radius:6px;padding:11px;font-size:14px;font-weight:700;cursor:pointer;color:#131921;transition:background 0.2s;}
+  .upload-btn:hover{background:#f3a847;}
+  .modal-footer{border-top:1px solid #f0f0f0;padding:12px 18px;font-size:11px;color:#888;text-align:center;}
+
+  /* SCREEN 3 — Loading */
+  .loading-body{padding:60px 40px;text-align:center;background:#fafafa;}
+  .scan-visual{width:180px;height:180px;background:#fff;border-radius:12px;border:2px solid #ff9900;margin:0 auto 24px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+  .scan-visual .img-preview{font-size:72px;}
+  .scan-line{position:absolute;left:0;right:0;height:3px;background:#ff9900;opacity:0.8;animation:scanMove 1.5s ease-in-out infinite;top:0;}
+  @keyframes scanMove{0%{top:0%;}50%{top:90%;}100%{top:0%;}}
+  .loading-body h2{font-size:20px;color:#131921;margin-bottom:8px;}
+  .loading-body p{font-size:14px;color:#666;margin-bottom:24px;}
+  .progress-track{background:#e0e0e0;border-radius:10px;height:8px;width:300px;margin:0 auto 10px;overflow:hidden;}
+  .progress-fill{background:#ff9900;height:100%;border-radius:10px;width:0%;transition:width 0.08s linear;}
+  .progress-label{font-size:12px;color:#ff9900;font-weight:700;height:18px;}
+  .loading-tags{display:flex;gap:8px;justify-content:center;margin-top:20px;flex-wrap:wrap;}
+  .loading-tag{background:#f0f0f0;border-radius:16px;padding:5px 14px;font-size:12px;color:#555;border:1px solid #ddd;}
+  .loading-tag.lit{background:#fff8e1;border-color:#ff9900;color:#cc6600;font-weight:700;}
+
+  /* SCREEN 4 — Results */
+  .results-topbar{padding:12px 20px;border-bottom:1px solid #e0e0e0;display:flex;align-items:center;gap:12px;background:#fafafa;}
+  .query-thumb{width:56px;height:56px;border-radius:8px;background:#e3f2fd;display:flex;align-items:center;justify-content:center;font-size:28px;border:1px solid #ddd;flex-shrink:0;}
+  .query-info h3{font-size:14px;font-weight:700;color:#131921;margin-bottom:3px;}
+  .query-info p{font-size:12px;color:#888;}
+  .query-info .retake{color:#007185;font-size:12px;cursor:pointer;margin-left:10px;}
+  .results-filter{padding:10px 20px;border-bottom:1px solid #e0e0e0;display:flex;gap:8px;overflow-x:auto;}
+  .filter-pill{background:#f7f7f7;border:1px solid #d5d9d9;border-radius:20px;padding:5px 14px;font-size:12px;color:#333;cursor:pointer;white-space:nowrap;transition:all 0.15s;}
+  .filter-pill:hover{border-color:#ff9900;}
+  .filter-pill.on{background:#fff8e1;border-color:#ff9900;color:#cc6600;font-weight:700;}
+  .results-layout{display:flex;gap:0;}
+  .results-sidebar{width:200px;flex-shrink:0;border-right:1px solid #e0e0e0;padding:16px;}
+  .results-sidebar h4{font-size:13px;font-weight:700;color:#131921;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #e8e8e8;}
+  .filter-group{margin-bottom:14px;}
+  .filter-group label{font-size:12px;color:#555;display:flex;align-items:center;gap:6px;margin-bottom:6px;cursor:pointer;}
+  .filter-group label input{accent-color:#ff9900;}
+  .results-main{flex:1;padding:16px;}
+  .results-main h3{font-size:14px;font-weight:700;color:#131921;margin-bottom:12px;}
+  .results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+  .res-card{border:1px solid #e0e0e0;border-radius:8px;padding:12px;cursor:pointer;transition:box-shadow 0.2s;background:#fff;}
+  .res-card:hover{box-shadow:0 2px 12px rgba(0,0,0,0.12);border-color:#ff9900;}
+  .res-img{width:100%;height:90px;background:#f5f5f5;border-radius:6px;margin-bottom:8px;display:flex;align-items:center;justify-content:center;font-size:36px;}
+  .match-badge{display:inline-block;background:#e8f5e9;color:#2e7d32;font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;margin-bottom:5px;}
+  .res-name{font-size:11px;color:#333;line-height:1.35;margin-bottom:4px;height:30px;overflow:hidden;}
+  .res-price{font-size:13px;font-weight:700;color:#cc0c39;margin-bottom:2px;}
+  .res-stars{font-size:10px;color:#ff9900;}
+  .res-prime{font-size:10px;color:#007185;font-weight:700;}
+  .add-btn{width:100%;background:#ff9900;border:none;border-radius:4px;padding:5px;font-size:11px;font-weight:700;cursor:pointer;margin-top:6px;color:#131921;}
+
+  /* Footer nav inside prototype */
+  .proto-footer{background:#fff;border-top:2px solid #e0e0e0;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;}
+  .step-dots{display:flex;gap:6px;}
+  .dot{width:8px;height:8px;border-radius:50%;background:#ddd;transition:background 0.2s;}
+  .dot.on{background:#ff9900;}
+  .pf-btn{background:#131921;color:#ff9900;border:none;border-radius:6px;padding:8px 20px;font-size:13px;font-weight:700;cursor:pointer;transition:background 0.2s;}
+  .pf-btn:hover{background:#232f3e;}
+  .pf-btn.ghost{background:#f0f0f0;color:#333;}
+  .pf-btn.ghost:hover{background:#e0e0e0;}
+  .screen-tag{font-size:11px;color:#888;text-align:center;}
+</style>
+</head>
+<body>
+
+<h1 class="proto-title">Amazon Web — Image Search Feature · Prototype by Sumaira</h1>
+
+<div class="flow-bar">
+  <div class="flow-step active" id="ft1" onclick="goTo(1)">1. Homepage</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step" id="ft2" onclick="goTo(2)">2. Upload modal</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step" id="ft3" onclick="goTo(3)">3. Analysing</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step" id="ft4" onclick="goTo(4)">4. Results</div>
+</div>
+
+<div class="browser">
+  <div class="browser-bar">
+    <div class="browser-dots"><span class="bd-r"></span><span class="bd-y"></span><span class="bd-g"></span></div>
+    <div class="browser-url" id="url-bar">🔒 amazon.com</div>
+  </div>
+
+  <!-- SCREEN 1: HOMEPAGE -->
+  <div class="screen active" id="s1">
+    <div class="amz-nav">
+      <div class="amz-logo">amazon<sub>.com</sub></div>
+      <div class="deliver"><span>Deliver to</span><strong>📍 New York 10001</strong></div>
+      <div class="search-wrap">
+        <select class="search-cat"><option>All</option><option>Fashion</option><option>Electronics</option></select>
+        <input class="search-input" type="text" placeholder="Search Amazon">
+        <div class="search-cam" onclick="goTo(2)" title="Search by image — NEW feature">
+          📷<span class="cam-new">NEW</span>
+        </div>
+        <button class="search-btn">🔍</button>
+      </div>
+      <div class="amz-right">
+        <a>Hello, Sumaira<span>Account &amp; Lists</span></a>
+        <a>Returns<span>&amp; Orders</span></a>
+        <a class="cart-icon">🛒<span class="cart-count">3</span></a>
+      </div>
+    </div>
+    <div class="amz-nav2">
+      <a class="bold">☰ All</a>
+      <a>Today's Deals</a><a>Customer Service</a><a>Registry</a>
+      <a>Prime</a><a>Fashion</a><a>Electronics</a><a>Home</a>
+      <a>Books</a><a>Sports</a>
+    </div>
+    <div class="feature-strip">
+      <span class="icon">📷</span>
+      <p><strong>New: Image Search on Amazon Web!</strong> See something in an Instagram or TikTok ad? Upload the photo and find it instantly on Amazon — no more typing guesses.</p>
+      <button onclick="goTo(2)" style="margin-left:auto;background:#ff9900;border:none;border-radius:20px;padding:8px 20px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Try it now →</button>
+    </div>
+    <div class="hero-banner">
+      <div class="hero-text">
+        <h2>Saw it in an ad?<br>Find it on Amazon instantly.</h2>
+        <p>Prime users told us: the biggest frustration is seeing a product in a social media ad and not being able to find it on Amazon web. We fixed that.</p>
+        <button class="cta-btn" onclick="goTo(2)">📷 Search by image</button>
+      </div>
+      <div class="hero-visual">
+        <div class="cam-big">📷</div>
+        <p>Upload any screenshot<br>from Instagram, TikTok,<br>Facebook or anywhere</p>
+      </div>
+    </div>
+    <div class="section-title">Recommended for you</div>
+    <div class="products-row">
+      <div class="prod-card"><div class="prod-img">👟</div><div class="prod-name">Nike Air Max 270 Running Shoes</div><div class="prod-stars">★★★★☆ (4,231)</div><div class="prod-price">$89.99</div><div class="prod-prime">✓ Prime</div></div>
+      <div class="prod-card"><div class="prod-img">👜</div><div class="prod-name">Leather Crossbody Bag Brown</div><div class="prod-stars">★★★★★ (1,847)</div><div class="prod-price">$34.99</div><div class="prod-prime">✓ Prime</div></div>
+      <div class="prod-card"><div class="prod-img">🕶️</div><div class="prod-name">Polarised Sunglasses UV400</div><div class="prod-stars">★★★★☆ (982)</div><div class="prod-price">$22.99</div><div class="prod-prime">✓ Prime</div></div>
+      <div class="prod-card"><div class="prod-img">⌚</div><div class="prod-name">Smart Watch Fitness Tracker</div><div class="prod-stars">★★★★☆ (3,102)</div><div class="prod-price">$49.99</div><div class="prod-prime">✓ Prime</div></div>
+      <div class="prod-card"><div class="prod-img">💄</div><div class="prod-name">Rare Beauty Soft Pinch Blush</div><div class="prod-stars">★★★★★ (2,541)</div><div class="prod-price">$23.00</div><div class="prod-prime">✓ Prime</div></div>
+      <div class="prod-card"><div class="prod-img">🎧</div><div class="prod-name">Sony WH-1000XM5 Headphones</div><div class="prod-stars">★★★★★ (8,902)</div><div class="prod-price">$279.99</div><div class="prod-prime">✓ Prime</div></div>
+    </div>
+    <div class="proto-footer">
+      <span class="screen-tag">Screen 1 — Homepage with image search entry point</span>
+      <div class="step-dots"><div class="dot on"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      <button class="pf-btn" onclick="goTo(2)">Click 📷 to continue →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: UPLOAD MODAL -->
+  <div class="screen" id="s2">
+    <div class="amz-nav">
+      <div class="amz-logo">amazon<sub>.com</sub></div>
+      <div class="deliver"><span>Deliver to</span><strong>📍 New York 10001</strong></div>
+      <div class="search-wrap" style="border-color:#febd69;">
+        <select class="search-cat"><option>All</option></select>
+        <input class="search-input" type="text" placeholder="Search by image or text...">
+        <div class="search-cam" style="background:#fff8e1;color:#ff9900;font-weight:700;">📷</div>
+        <button class="search-btn">🔍</button>
+      </div>
+      <div class="amz-right">
+        <a>Hello, Sumaira<span>Account &amp; Lists</span></a>
+        <a>Returns<span>&amp; Orders</span></a>
+        <a class="cart-icon">🛒<span class="cart-count">3</span></div></a>
+      </div>
+    </div>
+    <div class="amz-nav2">
+      <a class="bold">☰ All</a><a>Today's Deals</a><a>Customer Service</a><a>Prime</a><a>Fashion</a><a>Electronics</a>
+    </div>
+    <div class="modal-overlay">
+      <div class="modal">
+        <div class="modal-head">
+          <h3>📷 Search by image</h3>
+          <button class="close-btn" onclick="goTo(1)">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="drop-zone" onclick="goTo(3)">
+            <div class="dz-icon">🖼️</div>
+            <h4>Drop your screenshot here</h4>
+            <p>or click to browse files<br><small style="color:#bbb;">PNG, JPG, WEBP — up to 10MB</small></p>
+          </div>
+          <div class="or-line">or paste an image URL</div>
+          <div class="url-row">
+            <input type="text" placeholder="https://instagram.com/p/...">
+            <button onclick="goTo(3)">Search</button>
+          </div>
+          <button class="upload-btn" onclick="goTo(3)">📁 Upload from device</button>
+        </div>
+        <div class="modal-footer">Powered by Amazon Vision AI · Your images are not stored</div>
+      </div>
+    </div>
+    <div class="proto-footer">
+      <button class="pf-btn ghost" onclick="goTo(1)">← Back</button>
+      <div class="step-dots"><div class="dot"></div><div class="dot on"></div><div class="dot"></div><div class="dot"></div></div>
+      <div class="screen-tag">Screen 2 — Image upload modal</div>
+      <button class="pf-btn" onclick="goTo(3)">Upload → continue</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: LOADING -->
+  <div class="screen" id="s3">
+    <div class="amz-nav">
+      <div class="amz-logo">amazon<sub>.com</sub></div>
+      <div class="deliver"><span>Deliver to</span><strong>📍 New York 10001</strong></div>
+      <div class="search-wrap" style="border-color:#febd69;">
+        <select class="search-cat"><option>All</option></select>
+        <input class="search-input" type="text" placeholder="Analysing your image..." style="color:#999;font-style:italic;">
+        <div class="search-cam" style="background:#fff8e1;">📷</div>
+        <button class="search-btn">🔍</button>
+      </div>
+      <div class="amz-right">
+        <a>Hello, Sumaira<span>Account &amp; Lists</span></a>
+        <a class="cart-icon">🛒<span class="cart-count">3</span></a>
+      </div>
+    </div>
+    <div class="amz-nav2">
+      <a class="bold">☰ All</a><a>Today's Deals</a><a>Prime</a><a>Fashion</a><a>Electronics</a>
+    </div>
+    <div class="loading-body">
+      <div class="scan-visual">
+        <div class="img-preview">👟</div>
+        <div class="scan-line" id="scan-line"></div>
+      </div>
+      <h2>Analysing your image...</h2>
+      <p>Amazon Vision AI is identifying products and finding matches</p>
+      <div class="progress-track"><div class="progress-fill" id="prog"></div></div>
+      <div class="progress-label" id="prog-label">Detecting objects in image...</div>
+      <div class="loading-tags">
+        <div class="loading-tag lit" id="tag1">Detecting objects</div>
+        <div class="loading-tag" id="tag2">Matching features</div>
+        <div class="loading-tag" id="tag3">Searching catalogue</div>
+        <div class="loading-tag" id="tag4">Ranking results</div>
+      </div>
+    </div>
+    <div class="proto-footer">
+      <button class="pf-btn ghost" onclick="goTo(2)">← Back</button>
+      <div class="step-dots"><div class="dot"></div><div class="dot"></div><div class="dot on"></div><div class="dot"></div></div>
+      <div class="screen-tag">Screen 3 — AI analysis loading state</div>
+      <button class="pf-btn" onclick="goTo(4)">See results →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 4: RESULTS -->
+  <div class="screen" id="s4">
+    <div class="amz-nav">
+      <div class="amz-logo">amazon<sub>.com</sub></div>
+      <div class="deliver"><span>Deliver to</span><strong>📍 New York 10001</strong></div>
+      <div class="search-wrap" style="border-color:#ff9900;">
+        <select class="search-cat"><option>All</option></select>
+        <input class="search-input" type="text" value="Image search results — 47 matches found" readonly>
+        <div class="search-cam" style="background:#fff8e1;color:#ff9900;" onclick="goTo(2)">📷</div>
+        <button class="search-btn">🔍</button>
+      </div>
+      <div class="amz-right">
+        <a>Hello, Sumaira<span>Account &amp; Lists</span></a>
+        <a class="cart-icon">🛒<span class="cart-count">3</span></a>
+      </div>
+    </div>
+    <div class="amz-nav2">
+      <a class="bold">☰ All</a><a>Today's Deals</a><a>Prime</a><a>Fashion</a><a>Electronics</a>
+    </div>
+    <div class="results-topbar">
+      <div class="query-thumb">👟</div>
+      <div class="query-info">
+        <h3>Visual matches for your screenshot <span class="retake" onclick="goTo(2)">↩ Search again</span></h3>
+        <p>Amazon Vision found <strong>47 matching products</strong> · Showing top results · Sorted by relevance</p>
+      </div>
+    </div>
+    <div class="results-filter">
+      <div class="filter-pill on">All matches (47)</div>
+      <div class="filter-pill">Shoes (31)</div>
+      <div class="filter-pill">Under $50</div>
+      <div class="filter-pill">Prime eligible</div>
+      <div class="filter-pill">4★ &amp; above</div>
+      <div class="filter-pill">Men's</div>
+      <div class="filter-pill">Women's</div>
+      <div class="filter-pill">New arrivals</div>
+    </div>
+    <div class="results-layout">
+      <div class="results-sidebar">
+        <h4>Refine results</h4>
+        <div class="filter-group">
+          <div style="font-size:11px;color:#888;margin-bottom:6px;font-weight:700;">BRAND</div>
+          <label><input type="checkbox" checked> Nike</label>
+          <label><input type="checkbox"> Adidas</label>
+          <label><input type="checkbox"> Puma</label>
+          <label><input type="checkbox"> New Balance</label>
+          <label><input type="checkbox"> Reebok</label>
+        </div>
+        <div class="filter-group">
+          <div style="font-size:11px;color:#888;margin-bottom:6px;font-weight:700;">PRICE</div>
+          <label><input type="radio" name="price"> Under $50</label>
+          <label><input type="radio" name="price" checked> $50–$100</label>
+          <label><input type="radio" name="price"> Over $100</label>
+        </div>
+        <div class="filter-group">
+          <div style="font-size:11px;color:#888;margin-bottom:6px;font-weight:700;">PRIME</div>
+          <label><input type="checkbox" checked> Prime eligible only</label>
+        </div>
+        <div class="filter-group">
+          <div style="font-size:11px;color:#888;margin-bottom:6px;font-weight:700;">CUSTOMER RATING</div>
+          <label><input type="radio" name="stars"> ★★★★★</label>
+          <label><input type="radio" name="stars" checked> ★★★★☆ &amp; above</label>
+          <label><input type="radio" name="stars"> ★★★☆☆ &amp; above</label>
+        </div>
+      </div>
+      <div class="results-main">
+        <h3>Top visual matches</h3>
+        <div class="results-grid">
+          <div class="res-card">
+            <div class="match-badge">98% match</div>
+            <div class="res-img">👟</div>
+            <div class="res-name">Nike Air Max 270 Running Shoes Black/White</div>
+            <div class="res-price">$89.99</div>
+            <div class="res-stars">★★★★☆ (4,231)</div>
+            <div class="res-prime">✓ Prime · arrives tomorrow</div>
+            <button class="add-btn">Add to cart</button>
+          </div>
+          <div class="res-card">
+            <div class="match-badge">94% match</div>
+            <div class="res-img">👟</div>
+            <div class="res-name">Adidas Ultraboost 22 Running Shoe</div>
+            <div class="res-price">$79.99</div>
+            <div class="res-stars">★★★★★ (6,102)</div>
+            <div class="res-prime">✓ Prime · arrives tomorrow</div>
+            <button class="add-btn">Add to cart</button>
+          </div>
+          <div class="res-card">
+            <div class="match-badge">89% match</div>
+            <div class="res-img">👟</div>
+            <div class="res-name">Puma RS-X³ Puzzle Sneakers White</div>
+            <div class="res-price">$64.99</div>
+            <div class="res-stars">★★★★☆ (1,847)</div>
+            <div class="res-prime">✓ Prime · arrives in 2 days</div>
+            <button class="add-btn">Add to cart</button>
+          </div>
+          <div class="res-card">
+            <div class="res-img">👟</div>
+            <div class="res-name">New Balance 574 Classic Sneaker</div>
+            <div class="res-price">$59.99</div>
+            <div class="res-stars">★★★★☆ (3,204)</div>
+            <div class="res-prime">✓ Prime · arrives tomorrow</div>
+            <button class="add-btn">Add to cart</button>
+          </div>
+          <div class="res-card">
+            <div class="res-img">👟</div>
+            <div class="res-name">Reebok Classic Leather White Unisex</div>
+            <div class="res-price">$54.99</div>
+            <div class="res-stars">★★★★☆ (2,891)</div>
+            <div class="res-prime">✓ Prime · arrives tomorrow</div>
+            <button class="add-btn">Add to cart</button>
+          </div>
+          <div class="res-card">
+            <div class="res-img">👟</div>
+            <div class="res-name">Skechers D'Lites Chunky Platform Sole</div>
+            <div class="res-price">$44.99</div>
+            <div class="res-stars">★★★★☆ (987)</div>
+            <div class="res-prime">✓ Prime · arrives in 2 days</div>
+            <button class="add-btn">Add to cart</button>
+          </div>
+          <div class="res-card">
+            <div class="res-img">👟</div>
+            <div class="res-name">Converse Chuck Taylor All Star High Top</div>
+            <div class="res-price">$49.99</div>
+            <div class="res-stars">★★★★★ (12,034)</div>
+            <div class="res-prime">✓ Prime · arrives tomorrow</div>
+            <button class="add-btn">Add to cart</button>
+          </div>
+          <div class="res-card">
+            <div class="res-img">👟</div>
+            <div class="res-name">Vans Old Skool Classic Skate Shoe</div>
+            <div class="res-price">$59.99</div>
+            <div class="res-stars">★★★★★ (8,441)</div>
+            <div class="res-prime">✓ Prime · arrives tomorrow</div>
+            <button class="add-btn">Add to cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="proto-footer">
+      <button class="pf-btn ghost" onclick="goTo(1)">↩ Start over</button>
+      <div class="step-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot on"></div></div>
+      <div class="screen-tag">Screen 4 — Visual search results page</div>
+      <span style="font-size:12px;color:#aaa;">End of prototype flow ✓</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const urls = [
+  'amazon.com',
+  'amazon.com/?feature=image-search#upload-modal',
+  'amazon.com/image-search?status=analysing',
+  'amazon.com/s?method=image-search&matches=47'
+];
+const flowIds = ['ft1','ft2','ft3','ft4'];
+
+function goTo(n){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+  document.getElementById('url-bar').textContent = '🔒 ' + urls[n-1];
+  flowIds.forEach((id,i)=>{
+    const el = document.getElementById(id);
+    el.className = 'flow-step';
+    if(i+1 < n) el.classList.add('done');
+    if(i+1 === n) el.classList.add('active');
+  });
+  if(n===3) runLoader();
+}
+
+function runLoader(){
+  let w=0;
+  const stages=[
+    [0,'Detecting objects in image...','tag1'],
+    [28,'Matching visual features...','tag2'],
+    [55,'Searching 350M products...','tag3'],
+    [80,'Ranking by visual similarity...','tag4'],
+    [100,'Done! 47 matches found.','tag4']
+  ];
+  let si=0;
+  document.getElementById('prog').style.width='0%';
+  ['tag1','tag2','tag3','tag4'].forEach(t=>document.getElementById(t).className='loading-tag');
+  document.getElementById('tag1').classList.add('lit');
+  const iv = setInterval(()=>{
+    w = Math.min(w+1.2, 100);
+    document.getElementById('prog').style.width = w+'%';
+    if(si < stages.length && w >= stages[si][0]){
+      document.getElementById('prog-label').textContent = stages[si][2]
+        ? (document.getElementById(stages[si][2]).classList.add('lit'), stages[si][1])
+        : stages[si][1];
+      document.getElementById('prog-label').textContent = stages[si][1];
+      si++;
+    }
+    if(w>=100) clearInterval(iv);
+  }, 40);
+}
+</script>
+</body>
+</html>
